@@ -1,7 +1,0 @@
-{
-  "tool_name": "mcp__Claude_Browser__browser_batch",
-  "tool_input_preview": "{\"actions\":[{\"name\":\"computer\",\"input\":{\"action\":\"left_click\",\"ref\":\"ref_147\"}},{\"name\":\"computer\",\"input\":{\"action\":\"screenshot\",\"scale\":0.55}}]}",
-  "error": "actions[0] (computer:left_click) failed: computer timed out after 30s. The Browser pane is currently displayed. The pane may be stuck (modal dialog, navigation hang, or unresponsive renderer). Check preview_console_logs for errors. (0 completed, 1 remaining)",
-  "timestamp": "2026-09-01T22:24:48.662Z",
-  "retry_count": 2
-}
