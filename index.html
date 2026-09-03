@@ -290,6 +290,72 @@ input[type=text],input[type=date],input[type=time],input[type=number],select,tex
 .sync.live i{background:var(--ok)}
 footer{margin-top:34px; padding-top:16px; border-top:1px solid var(--line); color:var(--ink-3); font-size:12.5px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
 footer .heart{color:var(--rose)}
+
+/* ---------- self-study routine ---------- */
+.rtbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:2px 2px 0}
+.rtbar .sp{margin-left:auto}
+.rtbar .chip.strong{background:var(--amber-soft); border-color:var(--amber-line); color:var(--ink)}
+.banner{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--ink-3);
+  border-radius:var(--r); padding:11px 15px; font-size:13.5px; color:var(--ink-2)}
+.banner.warn{border-left-color:var(--warn); background:var(--warn-soft); color:var(--ink)}
+.banner b{color:var(--ink)}
+
+.rt{display:grid; gap:14px; grid-template-columns:1fr 1fr}
+@media(max-width:940px){.rt{grid-template-columns:1fr}}
+.dayc{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
+.dayc.today{border-color:var(--amber-line)}
+.dayc .dh{display:flex; align-items:baseline; gap:9px; padding:13px 16px 11px}
+.dayc .dh h3{font-size:16px; font-family:var(--serif); font-weight:400; letter-spacing:.01em}
+.dayc .dh .dt{font-size:12px; color:var(--ink-3)}
+.dayc .dh .now{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber);
+  border:1px solid var(--amber-line); border-radius:999px; padding:1px 7px}
+.dayc .dh .tot{margin-left:auto; font-size:12px; color:var(--ink-3)}
+
+.fixed{display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px}
+.fixed .fx{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-2);
+  background:var(--sunk); border:1px solid var(--line-2); border-radius:999px; padding:3px 9px}
+.fixed .fx b{font-weight:500; color:var(--ink-3)}
+.fixed .fx .fxt{color:var(--ink-3)}
+.fixed .fx.none{color:var(--ink-3); font-style:italic; background:transparent}
+
+.grp{padding:12px 16px 13px; border-top:1px solid var(--line-2)}
+.grp .gh{display:flex; align-items:center; gap:8px}
+.grp .gh h4{font-size:13.5px}
+.grp .gh .slot{font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3);
+  border:1px dashed var(--line); border-radius:999px; padding:1px 7px}
+.grp .gh .code{font-size:11px; color:var(--ink-3); letter-spacing:.04em}
+.grp .gh .mins{margin-left:auto; font-size:12px; color:var(--ink-3)}
+.dnote{margin:-4px 16px 12px; font-size:12.5px; color:var(--ink-3); font-style:italic}
+.grp .why{margin:4px 0 0 17px; font-size:12.5px; color:var(--ink-3); max-width:56ch}
+.grp.off{color:var(--rose); font-size:12.5px; padding:10px 16px 12px}
+.blk{display:flex; gap:12px; margin-top:9px; padding-left:17px}
+.blk .tm{font-size:12px; color:var(--ink-2); white-space:nowrap; padding-top:1px; min-width:88px}
+.blk .wt{font-size:13.5px; color:var(--ink); max-width:52ch}
+.blk .topic{display:block; font-size:12px; color:var(--ink-3); margin-top:2px}
+.blk .fortag{display:block; font-size:11px; letter-spacing:.04em; color:var(--ink-3); margin-bottom:5px}
+.blk .it{display:flex; align-items:baseline; gap:7px; font-size:13px; margin-top:4px}
+.blk .it .k{font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3);
+  border:1px solid var(--line); border-radius:4px; padding:0 5px; flex:0 0 auto}
+.blk .it .k.lecture{color:var(--hst); border-color:var(--hst)}
+.blk .it .k.notes{color:var(--ink-3); border-style:dashed}
+.blk .it .m{margin-left:auto; font-size:11.5px; color:var(--ink-3); flex:0 0 auto}
+.foot-note{margin:0; font-size:12.5px; color:var(--ink-3); max-width:66ch}
+
+/* both, side by side */
+.cmp{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
+.cmp .ch, .cmp .cr{display:grid; grid-template-columns:76px 1fr 1fr; gap:1px; background:var(--line-2)}
+.cmp .ch{background:var(--sunk)}
+.cmp .ch span{padding:9px 14px; font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
+.cmp .cr{border-top:1px solid var(--line-2)}
+.cmp .cr.today .cd{color:var(--amber)}
+.cmp .cd, .cmp .cc{background:var(--panel); padding:11px 14px}
+.cmp .cd{display:flex; align-items:baseline; gap:7px; font-size:13px; color:var(--ink-2)}
+.cmp .cd .tgm{color:var(--rose)}
+.cmp .cb{display:flex; align-items:center; gap:8px; font-size:13px; padding:3px 0}
+.cmp .cb .tm{color:var(--ink-3); font-size:12px; min-width:44px}
+.cmp .cb .m{margin-left:auto; color:var(--ink-3); font-size:12px}
+.cmp .cb.tg{color:var(--rose)}
+@media(max-width:640px){.cmp .ch, .cmp .cr{grid-template-columns:54px 1fr 1fr}}
 </style>
 </head>
 <body>
@@ -377,6 +443,116 @@ const CLASSES = {
     {d:5,s:'15:00',e:'15:50',c:'math',t:'Lecture 4',room:'Orange Hall',who:'A. Melnikov'}
   ]
 };
+
+/* =========================================================================
+   THE ROUTINE — a fixed weekly self-study schedule, two subjects a day.
+   Times are hand-fitted to the timetables above: nothing here collides with
+   a lecture, a seminar or the Monday lab. Recitations are deliberately
+   treated as free time and used for study (marked "recitation slot").
+   ========================================================================= */
+const ROUTINE = {
+  y:[
+    {d:1, note:'Long teaching day — two blocks after it, then stop.', groups:[
+      {c:'phys', why:'Stage 2 of the lab is due next Monday 12:00 — write it while the numbers still mean something',
+       blocks:[['15:15','16:45','Fill the Excel template: calculations, error propagation, units']]},
+      {c:'csci', why:'The lab is due Thursday 21:00 — open it three days out, not the night before',
+       blocks:[['17:00','18:30','Read the spec, sketch the solution on paper, get a skeleton running']]}
+    ]},
+    {d:2, note:'The afternoon is one long build.', groups:[
+      {c:'csci', why:'Main build day; Thursday is only for testing and submitting',
+       blocks:[['14:00','16:00','Write the core of the lab end to end']]},
+      {c:'math', why:'Your calculus lectures land Tue + Thu — do each one the same day',
+       blocks:[['16:15','17:45',"Rework today's lecture, then open WeBWorK"]]}
+    ]},
+    {d:3, note:'Only one class — your biggest study day. Spend it on physics.', groups:[
+      {c:'phys', why:'Exams are 70% of the grade and they are built out of the problem sets',
+       blocks:[['11:15','13:00','Read the worked examples, then work the problem set'],
+               ['14:00','15:15','Second pass: only the problems you got wrong']]},
+      {c:'math', why:'WeBWorK is due Sunday — be half done by Wednesday night',
+       blocks:[['16:00','17:30','WeBWorK, first pass']]}
+    ]},
+    {d:4, note:'The recitation slot goes to closing the CS lab.', groups:[
+      {c:'csci', why:'Due tonight at 21:00', slot:true,
+       blocks:[['13:30','15:00','Test, fix, submit — do not let this reach 20:00']]},
+      {c:'phys', why:'Monday and Wednesday lectures are still fresh',
+       blocks:[['15:15','16:45','Problem set']]}
+    ]},
+    {d:5, note:'Study in the recitation slot. The evening is off — properly off.', groups:[
+      {c:'math', why:'WeBWorK due Sunday 23:59', slot:true,
+       blocks:[['11:00','12:30','Second pass — finish everything that is not stuck']]},
+      {c:'phys', why:'Redo, do not reread. Redoing is what the exam actually tests',
+       blocks:[['14:00','16:00','The ten hardest problems of the week, timed']]}
+    ]},
+    {d:6, note:'Late start. Two blocks, then the day is yours.', groups:[
+      {c:'math', why:'Close the homework before Sunday so Sunday stays light',
+       blocks:[['12:00','14:00','Finish WeBWorK, then 10 textbook exercises untimed']]},
+      {c:'csci', why:"Next week's lab always looks smaller on a Saturday",
+       blocks:[['15:00','16:30',"Read next week's lab spec and try the first step"]]}
+    ]},
+    {d:7, note:'Reset day — read ahead so Monday is not a surprise.', groups:[
+      {c:'phys', why:'You cannot walk into the lab without having read the manual',
+       blocks:[['13:00','14:30',"Read Monday's lab manual, preview the week's chapters"]]},
+      {c:'math', why:'Submit before 23:59',
+       blocks:[['15:00','16:30','Submit WeBWorK, then look at what is due next week']]}
+    ]}
+  ],
+  l:[
+    {d:1, note:'Longest teaching day — two short blocks tonight, nothing heavier.', groups:[
+      {c:'hst', why:'Last of the week’s reading — Wednesday’s assignment is closed-book', hst:'mon',
+       blocks:[['16:15','17:30','']]},
+      {c:'phys', why:'Stage 2 of the lab is due next Monday 12:00',
+       blocks:[['19:30','20:45','Fill the Excel template: calculations, error propagation, units']]}
+    ]},
+    {d:2, note:'The free morning is where history actually gets done.', groups:[
+      {c:'hst', why:'Everything must be read by tonight — tomorrow is only recall', hst:'consolidate',
+       blocks:[['09:30','11:00','']]},
+      {c:'math', why:'Lectures Mon/Wed/Fri — keep them inside the same week',
+       blocks:[['16:00','17:45','Rework the last two lectures, then WeBWorK']]}
+    ]},
+    {d:3, note:'Seminar day — the graded assignment is the first 10 minutes of it.', groups:[
+      {c:'hst', why:'Closed book, Lockdown Browser, a 100–200 word answer', hst:'drill',
+       blocks:[['11:15','12:00','Recall drill: define the week’s terms, one line of evidence per source']]},
+      {c:'csci', why:'Lab due Thursday 21:00',
+       blocks:[['16:15','18:15','Build the lab']]}
+    ]},
+    {d:4, note:'Submit in the morning so the evening is not a deadline.', groups:[
+      {c:'csci', why:'Due tonight at 21:00',
+       blocks:[['09:30','11:30','Test, fix, submit']]},
+      {c:'phys', why:'Two lectures already this week and the problem set is waiting',
+       blocks:[['15:00','16:30',"This week's chapters + problem set"]]}
+    ]},
+    {d:5, note:'Both recitation slots are study time. Evening off.', groups:[
+      {c:'math', why:'WeBWorK due Sunday 23:59', slot:true,
+       blocks:[['11:00','12:30','WeBWorK, first pass']]},
+      {c:'phys', why:'Redo, do not reread', slot:true,
+       blocks:[['13:15','14:45','The hardest problems of the week, timed']]}
+    ]},
+    {d:6, note:'Late start — physics while you are fresh, history after.', groups:[
+      {c:'phys', why:'Review before it piles up into an exam week',
+       blocks:[['12:00','14:00','The ten hardest problems of the week, timed']]},
+      {c:'hst', why:'Next week’s readings are long — take the first bite now', hst:'sat',
+       blocks:[['15:00','16:15','']]}
+    ]},
+    {d:7, note:'Reset day: a head start on history, then close calculus.', groups:[
+      {c:'hst', why:'Head start on Wednesday', hst:'sun',
+       blocks:[['13:00','14:30','']]},
+      {c:'math', why:'Submit before 23:59',
+       blocks:[['15:00','16:30','Finish and submit WeBWorK']]}
+    ]}
+  ]
+};
+
+/* the week's history material, cut into the four reading slots of the routine */
+function hstSplit(k){
+  const h=HST_WEEK[k];
+  const out={sat:[],sun:[],mon:[]};
+  if(!h) return out;
+  const items=h.lec.map(x=>({kind:'lecture',t:x[0],m:x[1]}))
+             .concat(h.read.map(x=>({kind:'reading',t:x[0],m:x[1]})));
+  const names=['sat','sun','mon'];
+  items.forEach((it,i)=>{ out[names[Math.floor(i*3/items.length)]].push(it); });
+  return out;
+}
 
 /* Semester weeks, keyed by Monday */
 const WEEKS = ['2026-08-17','2026-08-24','2026-08-31','2026-09-07','2026-09-14','2026-09-21','2026-09-28',
@@ -750,6 +926,7 @@ function hstChunks(k){
    VIEWS
    ========================================================================= */
 const VIEWS=[
+  {id:'plan',  em:'🧭', label:'Self-study'},
   {id:'today', em:'🌙', label:'Today'},
   {id:'week',  em:'🗓️', label:'This week'},
   {id:'due',   em:'⏳', label:'Deadlines'},
@@ -757,7 +934,7 @@ const VIEWS=[
   {id:'push',  em:'🎯', label:'Big pushes'},
   {id:'ref',   em:'📚', label:'Courses'}
 ];
-let VIEW='today', WHO='y';
+let VIEW='plan', WHO='y';
 let NOW=new Date();
 
 const FORTUNES=[
@@ -1095,17 +1272,152 @@ function vRef(){
 /* =========================================================================
    RENDER + EVENTS
    ========================================================================= */
+/* ---------- SELF-STUDY ROUTINE ---------- */
+const SUBJ={phys:'Physics',math:'Calculus',csci:'Programming',hst:'History'};
+function rtMin(b){return toMin(b[1])-toMin(b[0])}
+function rtDayTotal(day){return day.groups.reduce((a,g)=>a+g.blocks.reduce((x,b)=>x+rtMin(b),0),0)}
+function rtWeekTotals(p){
+  const by={};
+  ROUTINE[p].forEach(d=>d.groups.forEach(g=>{by[g.c]=(by[g.c]||0)+g.blocks.reduce((x,b)=>x+rtMin(b),0)}));
+  return by;
+}
+function nextWeekKey(k){const i=WEEKS.indexOf(k); let j=i+1; if(WEEKS[j]===BREAK_WEEK) j++; return WEEKS[j]||null}
+
+/* the reading list a history block covers, and which seminar it is for */
+function hstFor(slot,k){
+  if(slot==='drill') return null;
+  const target=(slot==='sat'||slot==='sun') ? nextWeekKey(k) : k;
+  if(!target) return null;
+  return {k:target, slot, items:hstSplit(target)[slot]||[], seminar:addDays(parseD(target),2)};
+}
+
+function vPlan(){
+  const mon=mondayOf(NOW), k=dstr(mon), wn=weekNo(k);
+  if(WHO==='both') return planBoth(mon,k,wn);
+  const p=WHO, days=[0,1,2,3,4,5,6].map(n=>addDays(mon,n));
+  const tot=rtWeekTotals(p), sum=Object.keys(tot).reduce((a,c)=>a+tot[c],0);
+
+  let h='<div class="view-head"><h1>Self-study</h1>'
+   +'<p>A fixed weekly routine — never more than two subjects a day, and each one long enough to matter. '
+   +'Every block sits in a real gap in '+PEOPLE[p].name+'’s timetable. Recitations are treated as free time and used for study.</p></div>';
+
+  h+='<div class="rtbar">'
+   +'<span class="eyebrow">Week of '+mon.getDate()+' '+MON[mon.getMonth()]+(wn?' · week '+wn:'')+'</span>'
+   +'<span class="sp"></span>'
+   +Object.keys(tot).sort((a,b)=>tot[b]-tot[a]).map(c=>'<span class="chip"><span class="dot c-'+c+'"></span>'
+      +COURSES[c].code.split(' ')[0]+' '+hrs(tot[c])+'</span>').join('')
+   +'<span class="chip strong">'+hrs(sum)+' a week</span></div>';
+
+  if(k===BREAK_WEEK) h+='<div class="banner">Fall break — the routine restarts on Monday '+addDays(parseD(BREAK_WEEK),7).getDate()+' Oct.</div>';
+  const exam=allItems().filter(it=>it.kind==='exam'&&it.people.includes(p)&&it.due.slice(0,10)>=k&&it.due.slice(0,10)<=dstr(addDays(mon,6)));
+  exam.forEach(e=>h+='<div class="banner warn"><b>'+esc(e.title)+'</b> — '+fmtD(parseDT(e.due))+' '+e.due.slice(11)
+    +'. Give the '+COURSES[e.c].code.split(' ')[0]+' blocks the whole week and push the other subject to the weekend.</div>');
+
+  h+='<div class="rt">';
+  days.forEach((date,i)=>{
+    const day=ROUTINE[p][i], today=dstr(date)===dstr(NOW);
+    const fixed=classesOn(p,date).filter(c=>!/Recitation/i.test(c.t));
+    const hol=HOLIDAYS[dstr(date)];
+    h+='<section class="dayc'+(today?' today':'')+'">'
+     +'<div class="dh"><h3>'+DAYN[dow(date)]+'</h3><span class="dt num">'+date.getDate()+' '+MON[date.getMonth()]+'</span>'
+     +(today?'<span class="now">today</span>':'')
+     +'<span class="tot num">'+hrs(rtDayTotal(day))+'</span></div>';
+
+    h+='<div class="fixed">';
+    if(k===BREAK_WEEK||!wn) h+='<span class="fx none">no classes</span>';
+    else if(!fixed.length) h+='<span class="fx none">no classes — the day is yours</span>';
+    else fixed.forEach(c=>h+='<span class="fx"><b class="num">'+c.s+'</b><span class="dot c-'+c.c+'"></span>'
+      +COURSES[c.c].code.split(' ')[0]+' <span class="fxt">'+esc(c.t)+'</span></span>');
+    if(hol) h+='<span class="fx none">'+esc(hol)+'</span>';
+    h+='</div><p class="dnote">'+esc(day.note)+'</p>';
+
+    day.groups.forEach(g=>{
+      const mins=g.blocks.reduce((x,b)=>x+rtMin(b),0);
+      const topic = g.c==='phys'?(PHYS_WEEK[k]||{}).t : g.c==='math'?(MATH_WEEK[k]||{}).t : null;
+      h+='<div class="grp">'
+       +'<div class="gh"><span class="dot c-'+g.c+'"></span><h4>'+SUBJ[g.c]+'</h4>'
+       +'<span class="code">'+COURSES[g.c].code+'</span>'
+       +(g.slot?'<span class="slot">recitation slot</span>':'')
+       +'<span class="mins num">'+hrs(mins)+'</span></div>'
+       +'<p class="why">'+esc(g.why)+'</p>';
+
+      const hs=g.hst?hstFor(g.hst,k):null;
+      g.blocks.forEach(b=>{
+        h+='<div class="blk"><span class="tm num">'+b[0]+'–'+b[1]+'</span><div class="wt">';
+        if(hs){
+          h+='<span class="fortag">for the seminar on Wed '+hs.seminar.getDate()+' '+MON[hs.seminar.getMonth()]+' · '
+            +esc(short((HST_WEEK[hs.k]||{}).t||'',38))+'</span>';
+          if(hs.slot==='consolidate'){
+            h+='<div class="it"><span class="k notes">notes</span>Fill whatever the reading slots did not reach</div>'
+             +'<div class="it"><span class="k notes">terms</span>Write the week’s terms, one line of evidence per source</div>'
+             +'<div class="it"><span class="k notes">plan</span>Draft the 100–200 word answer you would write tomorrow</div>';
+          }else if(hs.items.length) hs.items.forEach(it=>h+='<div class="it"><span class="k '+it.kind+'">'+it.kind+'</span>'
+            +esc(short(it.t,64))+'<span class="m num">'+it.m+'m</span></div>');
+          else h+='<div class="it"><span class="k notes">notes</span>Nothing new set this week — re-read and consolidate</div>';
+        }else{
+          h+=esc(b[2]);
+          if(topic) h+='<span class="topic">'+esc(short(topic,72))+'</span>';
+        }
+        h+='</div></div>';
+      });
+      h+='</div>';
+    });
+    if(dow(date)===5) h+='<div class="grp off">Friday evening is not a study block ♥</div>';
+    h+='</section>';
+  });
+  h+='</div>';
+  h+='<p class="foot-note">The times are the routine, not the law: if a block slips, move it inside the same day — '
+    +'the order is what keeps the deadlines safe.</p>';
+  return h;
+}
+
+/* both, side by side — where the two routines line up */
+function planBoth(mon,k,wn){
+  const days=[0,1,2,3,4,5,6].map(n=>addDays(mon,n));
+  let h='<div class="view-head"><h1>Self-study</h1><p>Both routines side by side. '
+   +'Rose means you are on the same subject at the same time — that is the block to sit at one desk for.</p></div>';
+  h+='<div class="rtbar"><span class="eyebrow">Week of '+mon.getDate()+' '+MON[mon.getMonth()]+(wn?' · week '+wn:'')+'</span>'
+   +'<span class="sp"></span>'
+   +['y','l'].map(p=>{const t=rtWeekTotals(p);const s=Object.keys(t).reduce((a,c)=>a+t[c],0);
+      return '<span class="chip">'+PEOPLE[p].name+' '+hrs(s)+'</span>';}).join('')+'</div>';
+  h+='<div class="cmp"><div class="ch"><span></span><span>Yerkhat</span><span>Lashyn</span></div>';
+  days.forEach((date,i)=>{
+    const today=dstr(date)===dstr(NOW);
+    const rows=['y','l'].map(p=>ROUTINE[p][i]);
+    const flat=rows.map(d=>d.groups.reduce((a,g)=>a.concat(g.blocks.map(b=>({c:g.c,s:toMin(b[0]),e:toMin(b[1])}))),[]));
+    const tg=flat[0].some(x=>flat[1].some(y=>y.c===x.c && Math.min(x.e,y.e)-Math.max(x.s,y.s)>=45));
+    h+='<div class="cr'+(today?' today':'')+'"><div class="cd"><b>'+DAYN[dow(date)].slice(0,3)+'</b>'
+      +'<span class="num">'+date.getDate()+'</span>'+(tg?'<span class="tgm">♥</span>':'')+'</div>';
+    rows.forEach((d,ri)=>{
+      h+='<div class="cc">';
+      d.groups.forEach(g=>{
+        const mins=g.blocks.reduce((x,b)=>x+rtMin(b),0);
+        const together = flat[1-ri].some(y=>y.c===g.c &&
+          g.blocks.some(b=>Math.min(toMin(b[1]),y.e)-Math.max(toMin(b[0]),y.s)>=45));
+        h+='<div class="cb'+(together?' tg':'')+'"><span class="tm num">'+g.blocks[0][0]+'</span>'
+          +'<span class="dot c-'+g.c+'"></span>'+COURSES[g.c].code.split(' ')[0]
+          +'<span class="m num">'+hrs(mins)+'</span></div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+  h+='</div>';
+  return h;
+}
+
 function render(){
   NOW=new Date();
   document.getElementById('whoSeg').innerHTML=
     [['y','<span class="dotY"></span>Yerkhat'],['l','<span class="dotL"></span>Lashyn'],['both','Both']]
     .map(([v,l])=>'<button data-who="'+v+'" aria-pressed="'+(WHO===v)+'">'+l+'</button>').join('');
+  document.getElementById('modeSeg').style.display = VIEW==='plan' ? 'none' : '';
   document.getElementById('modeSeg').innerHTML=
     Object.keys(MODES).map(m=>'<button data-mode="'+m+'" aria-pressed="'+(S.mode===m)+'" title="'+MODES[m].hint+'">'+MODES[m].label+'</button>').join('');
   document.getElementById('nav').innerHTML=
     VIEWS.map(v=>'<button data-view="'+v.id+'"'+(VIEW===v.id?' aria-current="page"':'')+'><span class="em">'+v.em+'</span>'+v.label+'</button>').join('');
   const m=document.getElementById('main');
-  m.innerHTML = VIEW==='today'?vToday(): VIEW==='week'?vWeek(): VIEW==='due'?vDue():
+  m.innerHTML = VIEW==='plan'?vPlan(): VIEW==='today'?vToday(): VIEW==='week'?vWeek(): VIEW==='due'?vDue():
                 VIEW==='hist'?vHist(): VIEW==='push'?vPush(): vRef();
   document.getElementById('fortune').textContent=FORTUNES[NOW.getDate()%FORTUNES.length];
 }
