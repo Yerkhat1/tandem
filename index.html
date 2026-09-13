@@ -11,727 +11,486 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 <title>Tandem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
 <style>
 :root{
-  --ground:#EDEBE6; --panel:#FBFAF7; --panel-2:#F3F1EB; --sunk:#E4E1D9;
-  --ink:#181B21; --ink-2:#565C66; --ink-3:#878D97;
-  --line:#DBD7CE; --line-2:#E8E5DD;
-  --amber:#A96D14; --amber-soft:#F2E3C6; --amber-line:#D8B579;
-  --rose:#AC4F65; --rose-soft:#F5DEE3; --rose-line:#D79AA8;
-  --ok:#2C7A61; --ok-soft:#DCEDE6;
-  --warn:#9C6A12; --warn-soft:#F4E7CC;
-  --crit:#AF3D2C; --crit-soft:#F6DED9;
-  --phys:#3F58A3; --math:#25776A; --csci:#9A5734; --hst:#7F5090;
-  --shadow:0 1px 2px rgba(24,27,33,.05), 0 12px 28px -20px rgba(24,27,33,.35);
-  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
-  --sans:"Schibsted Grotesk",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --r:12px;
+  --bg:#F6F5F2; --card:#FFFFFF; --soft:#F1EFEA;
+  --ink:#1F2328; --ink-2:#5E656E; --ink-3:#9BA1A8;
+  --line:#E8E5DF;
+  --accent:#2F6FEB; --accent-soft:#E8F0FE;
+  --warn:#B4541F; --warn-soft:#FBEDE3;
+  --ok:#2E8A5F;
+  --phys:#4A6FC4; --math:#2E8E78; --csci:#C27442; --hst:#9064AE;
+  --r:14px;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#0E1218; --panel:#161B23; --panel-2:#1B222B; --sunk:#0A0E13;
-    --ink:#E9E4DA; --ink-2:#98A2AE; --ink-3:#69727E;
-    --line:#252E39; --line-2:#1C232C;
-    --amber:#E9A23B; --amber-soft:#33260F; --amber-line:#6B4E1D;
-    --rose:#E2899B; --rose-soft:#32191F; --rose-line:#6C3A45;
-    --ok:#5BB99B; --ok-soft:#12271F;
-    --warn:#DFA54D; --warn-soft:#2C2210;
-    --crit:#E0705C; --crit-soft:#301613;
-    --phys:#8AA9E0; --math:#5EBBA4; --csci:#D08A6A; --hst:#C08BC0;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 32px -22px rgba(0,0,0,.9);
+    --bg:#121417; --card:#1A1D21; --soft:#22262B;
+    --ink:#E8E6E1; --ink-2:#A3A9B0; --ink-3:#6C737B;
+    --line:#2A2E34;
+    --accent:#7EA6F6; --accent-soft:#1E2A3F;
+    --warn:#E8955F; --warn-soft:#33241A;
+    --ok:#62C08F;
+    --phys:#86A3E6; --math:#63C1A8; --csci:#E0A07A; --hst:#C09ADB;
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0E1218; --panel:#161B23; --panel-2:#1B222B; --sunk:#0A0E13;
-  --ink:#E9E4DA; --ink-2:#98A2AE; --ink-3:#69727E;
-  --line:#252E39; --line-2:#1C232C;
-  --amber:#E9A23B; --amber-soft:#33260F; --amber-line:#6B4E1D;
-  --rose:#E2899B; --rose-soft:#32191F; --rose-line:#6C3A45;
-  --ok:#5BB99B; --ok-soft:#12271F;
-  --warn:#DFA54D; --warn-soft:#2C2210;
-  --crit:#E0705C; --crit-soft:#301613;
-  --phys:#8AA9E0; --math:#5EBBA4; --csci:#D08A6A; --hst:#C08BC0;
-  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 32px -22px rgba(0,0,0,.9);
+  --bg:#121417; --card:#1A1D21; --soft:#22262B;
+  --ink:#E8E6E1; --ink-2:#A3A9B0; --ink-3:#6C737B;
+  --line:#2A2E34;
+  --accent:#7EA6F6; --accent-soft:#1E2A3F;
+  --warn:#E8955F; --warn-soft:#33241A;
+  --ok:#62C08F;
+  --phys:#86A3E6; --math:#63C1A8; --csci:#E0A07A; --hst:#C09ADB;
 }
 
 *{box-sizing:border-box}
 body{
-  margin:0; background:var(--ground); color:var(--ink);
-  font-family:var(--sans); font-size:15px; line-height:1.5;
+  margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3,h4{margin:0; font-weight:600; text-wrap:balance; letter-spacing:-.012em}
-button,input,select,textarea{font:inherit; color:inherit}
+h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.01em}
+p{margin:0}
+button,input,select{font:inherit; color:inherit}
 button{cursor:pointer}
-a{color:var(--amber)}
-:focus-visible{outline:2px solid var(--amber); outline-offset:2px; border-radius:6px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+.n{font-variant-numeric:tabular-nums}
 
-.num{font-family:var(--mono); font-variant-numeric:tabular-nums; font-feature-settings:"tnum"}
-.eyebrow{font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
-
-/* ---------- shell ---------- */
-.shell{max-width:1180px; margin:0 auto; padding:0 20px 96px}
-header.top{
-  position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--ground) 88%, transparent);
-  backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
-  margin:0 -20px 0; padding:14px 20px 12px;
+/* ---------- header ---------- */
+.wrap{max-width:760px; margin:0 auto; padding:0 18px 80px}
+header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+.bar{max-width:760px; margin:0 auto; padding:14px 18px 10px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.brand{font-weight:650; font-size:16px; margin-right:auto}
+.tabs{display:flex; gap:2px}
+.tabs button,.who button{border:0; background:transparent; color:var(--ink-2); padding:6px 11px; border-radius:9px; font-size:14px}
+.tabs button:hover,.who button:hover{color:var(--ink)}
+.tabs button[aria-current="page"]{color:var(--ink); background:var(--card); box-shadow:0 0 0 1px var(--line)}
+.who{display:flex; background:var(--soft); border-radius:10px; padding:2px}
+.who button{font-size:13px; padding:4px 10px}
+.who button[aria-pressed="true"]{background:var(--card); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.08)}
+@media(max-width:560px){
+  .bar{gap:8px 10px}
+  .tabs{order:3; width:100%}
+  .tabs button{flex:1}
 }
-.topbar{display:flex; align-items:center; gap:16px; flex-wrap:wrap; max-width:1180px; margin:0 auto}
-.mark{display:flex; align-items:center; gap:9px; margin-right:auto}
-.mark svg{display:block; overflow:visible}
-.mark .wm{font-family:var(--serif); font-size:26px; letter-spacing:.01em; line-height:1}
-.mark .sub{font-size:11px; color:var(--ink-3); letter-spacing:.1em; text-transform:uppercase; font-weight:600; padding-top:5px}
-@media(max-width:620px){.mark .sub{display:none}}
 
-.seg{display:inline-flex; background:var(--sunk); border:1px solid var(--line); border-radius:999px; padding:3px; gap:2px}
-.seg button{
-  border:0; background:transparent; color:var(--ink-2); font-size:13px; font-weight:500;
-  padding:5px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
-}
-.seg button:hover{color:var(--ink)}
-.seg button[aria-pressed="true"]{background:var(--panel); color:var(--ink); box-shadow:var(--shadow)}
-.seg .dotY{width:7px;height:7px;border-radius:50%;background:var(--phys)}
-.seg .dotL{width:7px;height:7px;border-radius:50%;background:var(--rose)}
+main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 
-nav.rail{display:flex; gap:4px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; max-width:1180px; margin:0 auto}
-nav.rail::-webkit-scrollbar{display:none}
-nav.rail button{
-  border:1px solid transparent; background:transparent; color:var(--ink-2);
-  padding:7px 13px; border-radius:999px; font-size:13.5px; font-weight:500; white-space:nowrap;
-  display:inline-flex; align-items:center; gap:7px;
-}
-nav.rail button:hover{color:var(--ink); background:var(--panel-2)}
-nav.rail button[aria-current="page"]{background:var(--panel); border-color:var(--line); color:var(--ink); box-shadow:var(--shadow)}
-nav.rail .em{font-size:14px; filter:saturate(.9)}
-
-main{padding-top:26px; display:flex; flex-direction:column; gap:22px}
-.view-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:-4px}
-.view-head h1{font-family:var(--serif); font-size:32px; font-weight:400; letter-spacing:0}
-.view-head p{margin:0; color:var(--ink-2); font-size:14px; max-width:62ch}
-
-/* ---------- cards ---------- */
-.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
-.card>.hd{display:flex; align-items:center; gap:10px; padding:13px 16px; border-bottom:1px solid var(--line-2)}
-.card>.hd h3{font-size:14px; letter-spacing:.01em}
-.card>.hd .sp{margin-left:auto}
-.card>.bd{padding:16px}
-.card>.bd.tight{padding:8px 16px 14px}
-.grid{display:grid; gap:16px}
-.g2{grid-template-columns:1fr 1fr}
-.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:900px){.g2,.g3{grid-template-columns:1fr}}
-
-/* ---------- today strip ---------- */
-.strip{
-  background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow);
-  padding:18px 20px; display:flex; align-items:center; gap:26px; flex-wrap:wrap;
-}
-.strip .date{display:flex; flex-direction:column; gap:2px; min-width:170px}
-.strip .date .d1{font-family:var(--serif); font-size:30px; line-height:1.05}
-.strip .date .d2{font-size:12.5px; color:var(--ink-2)}
-.strip .stat{display:flex; flex-direction:column; gap:3px}
-.strip .stat .v{font-family:var(--mono); font-size:19px; font-weight:500; letter-spacing:-.02em}
-.strip .stat .v small{font-size:12px; color:var(--ink-3); font-weight:400}
-.strip .divider{width:1px; align-self:stretch; background:var(--line-2)}
-@media(max-width:700px){.strip .divider{display:none}}
-
-.countdown.crit{color:var(--crit)} .countdown.warn{color:var(--warn)} .countdown.ok{color:var(--ok)}
-
-/* ---------- pills / chips ---------- */
-.chip{
-  display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600;
-  padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--ink-2); background:var(--panel-2);
-  letter-spacing:.02em; white-space:nowrap;
-}
-.chip.assumed{border-style:dashed; color:var(--ink-3)}
-.chip.crit{color:var(--crit); border-color:var(--crit); background:var(--crit-soft)}
-.chip.warn{color:var(--warn); border-color:var(--warn-line,var(--warn)); background:var(--warn-soft)}
-.chip.ok{color:var(--ok); background:var(--ok-soft); border-color:var(--ok)}
-.chip.rose{color:var(--rose); background:var(--rose-soft); border-color:var(--rose-line)}
-.dot{width:8px; height:8px; border-radius:50%; flex:0 0 auto}
+/* ---------- common ---------- */
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r)}
+.pad{padding:16px 18px}
+.muted{color:var(--ink-2)} .faint{color:var(--ink-3)}
+.small{font-size:13px}
+.label{font-size:12px; color:var(--ink-3); font-weight:500}
+.dot{width:8px; height:8px; border-radius:50%; display:inline-block; flex:0 0 auto}
 .c-phys{background:var(--phys)} .c-math{background:var(--math)} .c-csci{background:var(--csci)} .c-hst{background:var(--hst)} .c-other{background:var(--ink-3)}
-.t-phys{color:var(--phys)} .t-math{color:var(--math)} .t-csci{color:var(--csci)} .t-hst{color:var(--hst)} .t-other{color:var(--ink-2)}
 
-/* ---------- day timeline ---------- */
-.tl{display:flex; flex-direction:column}
-.tl .row{display:grid; grid-template-columns:64px 1fr; gap:12px; padding:9px 0; border-top:1px solid var(--line-2)}
-.tl .row:first-child{border-top:0}
-.tl .tm{font-family:var(--mono); font-size:12px; color:var(--ink-3); padding-top:2px; line-height:1.35}
-.tl .body{display:flex; flex-direction:column; gap:3px}
-.tl .ttl{font-weight:600; font-size:14px; display:flex; align-items:center; gap:8px}
-.tl .meta{font-size:12.5px; color:var(--ink-2)}
-.tl .row.class .ttl::before{content:""; width:3px; height:14px; border-radius:2px; background:currentColor; opacity:.65}
-
-/* ---------- study blocks ---------- */
-.blocks{display:flex; flex-direction:column; gap:8px}
-.blk{
-  display:grid; grid-template-columns:auto 62px 1fr auto; gap:12px; align-items:start;
-  padding:11px 12px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2);
-}
-.blk.done{opacity:.5}
-.blk.done .b-title{text-decoration:line-through}
-.blk .b-time{font-family:var(--mono); font-size:12px; color:var(--ink-2); padding-top:2px; line-height:1.4}
-.blk .b-title{font-weight:600; font-size:14px; display:block}
-.blk .b-why{font-size:12.5px; color:var(--ink-2); margin-top:2px; display:block}
-.blk .b-len{font-family:var(--mono); font-size:12px; color:var(--ink-3)}
-.blk.together{background:var(--rose-soft); border-color:var(--rose-line)}
-.blk.together .b-why{color:var(--rose)}
-.tick{
-  appearance:none; width:19px; height:19px; border-radius:6px; border:1.5px solid var(--line);
-  background:var(--panel); display:grid; place-items:center; margin:1px 0 0; padding:0; flex:0 0 auto;
-}
-.tick:hover{border-color:var(--amber)}
-.tick[aria-checked="true"]{background:var(--ok); border-color:var(--ok)}
-.tick[aria-checked="true"]::after{content:"✓"; color:var(--panel); font-size:12px; font-weight:700; line-height:1}
-:root[data-theme="dark"] .tick[aria-checked="true"]::after{color:#0A0E13}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tick[aria-checked="true"]::after{color:#0A0E13}}
-
-.unfit{margin-top:12px; padding:10px 12px; border:1px dashed var(--line); border-radius:10px; font-size:12.5px; color:var(--ink-2); background:var(--sunk)}
-
-/* ---------- week grid ---------- */
-.weekwrap{overflow-x:auto; padding-bottom:4px}
-.week{display:grid; grid-template-columns:repeat(7,minmax(148px,1fr)); gap:10px; min-width:1040px}
-.day{background:var(--panel); border:1px solid var(--line); border-radius:10px; display:flex; flex-direction:column; overflow:hidden}
-.day.today{border-color:var(--amber); box-shadow:0 0 0 1px var(--amber)}
-.day.off{background:var(--sunk)}
-.day.past{opacity:.5}
-.day .dh{padding:9px 11px; border-bottom:1px solid var(--line-2); display:flex; align-items:baseline; gap:7px}
-.day .dh b{font-size:13px} .day .dh span{font-family:var(--mono); font-size:11.5px; color:var(--ink-3)}
-.day .dbody{padding:9px; display:flex; flex-direction:column; gap:6px}
-.mini{font-size:11.5px; padding:5px 7px; border-radius:7px; border:1px solid var(--line-2); background:var(--panel-2); line-height:1.3}
-.mini.cls{background:transparent; border-style:solid; border-color:var(--line-2); color:var(--ink-2)}
-.mini .mt{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); display:block}
-.mini.study{border-color:var(--line)}
-.mini.tg{background:var(--rose-soft); border-color:var(--rose-line)}
-.mini.due{background:var(--crit-soft); border-color:var(--crit); color:var(--crit); font-weight:600}
-.loadbar{display:flex; height:6px; border-radius:3px; overflow:hidden; background:var(--sunk); margin-top:2px}
-.loadbar i{display:block}
-
-/* ---------- deadline list ---------- */
-.dl{display:flex; flex-direction:column}
-.dl .item{display:grid; grid-template-columns:auto 88px 1fr auto; gap:13px; align-items:center; padding:11px 16px; border-top:1px solid var(--line-2)}
-.dl .item:first-child{border-top:0}
-.dl .item.done{opacity:.45}
-.dl .item.done .n{text-decoration:line-through}
-.dl .when{font-family:var(--mono); font-size:12px; color:var(--ink-2); line-height:1.35}
-.dl .n{font-weight:600; font-size:14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-.dl .sub{font-size:12.5px; color:var(--ink-2); margin-top:1px}
-.dl .right{display:flex; align-items:center; gap:8px; justify-self:end}
-.gh{padding:9px 16px; background:var(--sunk); border-top:1px solid var(--line-2); display:flex; gap:10px; align-items:baseline}
-.gh b{font-size:12px; letter-spacing:.02em} .gh span{font-size:11.5px; color:var(--ink-3)}
-@media(max-width:620px){
-  .dl .item{grid-template-columns:auto 1fr; row-gap:4px}
-  .dl .when{grid-column:2} .dl .right{grid-column:2; justify-self:start}
-}
-
-/* ---------- history ---------- */
-.chunk{display:grid; grid-template-columns:auto 74px 1fr auto; gap:12px; align-items:center; padding:9px 0; border-top:1px solid var(--line-2)}
-.chunk:first-of-type{border-top:0}
-.chunk .day-l{font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
-.chunk .cn{font-size:13.5px}
-.chunk.done .cn{text-decoration:line-through; opacity:.55}
-.chunk .kind{font-size:11px; color:var(--ink-3); font-family:var(--mono)}
-details.wk{border-top:1px solid var(--line-2)}
-details.wk summary{padding:11px 16px; cursor:pointer; display:flex; gap:10px; align-items:center; font-size:13.5px; list-style:none}
-details.wk summary::-webkit-details-marker{display:none}
-details.wk summary::before{content:"›"; color:var(--ink-3); transition:transform .15s; display:inline-block}
-details.wk[open] summary::before{transform:rotate(90deg)}
-details.wk .in{padding:0 16px 14px 40px}
-
-/* ---------- push cards ---------- */
-.push{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center}
-.ring{width:74px; height:74px; flex:0 0 auto}
-.ring text{font-family:var(--mono); font-size:15px; fill:var(--ink); font-weight:500}
-.quota{font-family:var(--mono); font-size:22px; letter-spacing:-.02em}
-.stepper{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--panel-2)}
-.stepper button{border:0; background:transparent; padding:5px 11px; font-size:14px; color:var(--ink-2)}
-.stepper button:hover{background:var(--sunk); color:var(--ink)}
-.stepper input{border:0; background:transparent; width:56px; text-align:center; font-family:var(--mono); font-size:13px; border-left:1px solid var(--line); border-right:1px solid var(--line)}
-.bar{height:7px; border-radius:4px; background:var(--sunk); overflow:hidden; margin:9px 0 4px}
-.bar i{display:block; height:100%; background:var(--amber)}
-
-/* ---------- forms ---------- */
-.field{display:flex; flex-direction:column; gap:5px}
-.field label{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
-input[type=text],input[type=date],input[type=time],input[type=number],select,textarea{
-  background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:13.5px; width:100%;
-}
-.btn{
-  border:1px solid var(--line); background:var(--panel-2); color:var(--ink); border-radius:8px;
-  padding:7px 13px; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:7px;
-}
-.btn:hover{border-color:var(--amber); color:var(--amber)}
-.btn.primary{background:var(--amber); border-color:var(--amber); color:var(--panel)}
-:root[data-theme="dark"] .btn.primary{color:#12161C}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#12161C}}
-.btn.primary:hover{filter:brightness(1.06); color:var(--panel)}
-.btn.ghost{background:transparent; border-color:transparent; color:var(--ink-3); font-weight:500}
-.btn.ghost:hover{color:var(--crit); border-color:transparent}
-
-/* ---------- misc ---------- */
-.note-in{width:100%; background:transparent; border:0; border-bottom:1px dashed var(--line); padding:6px 2px; font-family:var(--serif); font-size:19px}
-.note-in::placeholder{color:var(--ink-3); font-family:var(--sans); font-size:14px}
-.notecard{background:linear-gradient(180deg, var(--rose-soft), var(--panel)); border-color:var(--rose-line)}
-.empty{display:flex; flex-direction:column; align-items:center; gap:10px; padding:26px 16px; color:var(--ink-3); text-align:center; font-size:13.5px}
-.rules{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px}
-.rules li{display:grid; grid-template-columns:16px 1fr; gap:9px; font-size:13px; color:var(--ink-2); line-height:1.45}
-.rules li b{color:var(--ink); font-weight:600}
-.rules li::before{content:"—"; color:var(--ink-3)}
-.kv{display:grid; grid-template-columns:auto 1fr; gap:4px 14px; font-size:13px}
-.kv dt{color:var(--ink-3)} .kv dd{margin:0; font-family:var(--mono); font-size:12.5px}
-.sync{font-size:11.5px; color:var(--ink-3); display:inline-flex; align-items:center; gap:6px}
-.sync i{width:6px; height:6px; border-radius:50%; background:var(--ink-3); display:block}
-.sync.live i{background:var(--ok)}
-footer{margin-top:34px; padding-top:16px; border-top:1px solid var(--line); color:var(--ink-3); font-size:12.5px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
-footer .heart{color:var(--rose)}
-
-/* ---------- self-study routine ---------- */
-.rtbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:2px 2px 0}
-.rtbar .sp{margin-left:auto}
-.rtbar .chip.strong{background:var(--amber-soft); border-color:var(--amber-line); color:var(--ink)}
-.banner{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--ink-3);
-  border-radius:var(--r); padding:11px 15px; font-size:13.5px; color:var(--ink-2)}
-.banner.warn{border-left-color:var(--warn); background:var(--warn-soft); color:var(--ink)}
+.hello h1{font-size:24px}
+.hello p{margin-top:2px}
+.banner{border-radius:12px; padding:11px 14px; font-size:14px; background:var(--soft); color:var(--ink-2)}
+.banner.warn{background:var(--warn-soft); color:var(--ink)}
 .banner b{color:var(--ink)}
 
-.rt{display:grid; gap:14px; grid-template-columns:1fr 1fr}
-@media(max-width:940px){.rt{grid-template-columns:1fr}}
-.dayc{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
-.dayc.today{border-color:var(--amber-line)}
-.dayc .dh{display:flex; align-items:baseline; gap:9px; padding:13px 16px 11px}
-.dayc .dh h3{font-size:16px; font-family:var(--serif); font-weight:400; letter-spacing:.01em}
-.dayc .dh .dt{font-size:12px; color:var(--ink-3)}
-.dayc .dh .now{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber);
-  border:1px solid var(--amber-line); border-radius:999px; padding:1px 7px}
-.dayc .dh .tot{margin-left:auto; font-size:12px; color:var(--ink-3)}
+/* ---------- day rows ---------- */
+.rows{display:flex; flex-direction:column}
+.row{display:grid; grid-template-columns:22px 92px 1fr; gap:10px; padding:12px 18px; border-top:1px solid var(--line); align-items:start}
+.row:first-child{border-top:0}
+.row .tm{font-size:13px; color:var(--ink-2); padding-top:1px}
+.row .sub{display:flex; align-items:center; gap:7px; font-weight:600; font-size:14.5px}
+.row .what{font-size:13.5px; color:var(--ink-2); margin-top:1px}
+.row .list{margin:6px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:3px}
+.row .list li{font-size:13px; color:var(--ink-2); display:flex; gap:8px}
+.row .list li span:last-child{margin-left:auto; color:var(--ink-3); white-space:nowrap}
+.row.cls .sub{font-weight:500; color:var(--ink-2); font-size:14px}
+.row.cls .tm{color:var(--ink-3)}
+.row.exam{background:var(--warn-soft)}
+.row.exam .sub{color:var(--warn)}
+.row.done .sub,.row.done .what,.row.done .list{opacity:.45}
+.row.done .sub span.t{text-decoration:line-through}
+.row.skip{opacity:.45}
+.row.now{box-shadow:inset 3px 0 0 var(--accent)}
+@media(max-width:560px){
+  .row{grid-template-columns:22px 1fr; row-gap:2px; padding:11px 14px}
+  .row>.tm{grid-column:2; font-size:12.5px}
+  .row>div{grid-column:2}
+  .row>.tick,.row>.sp{grid-row:1/3}
+  .item{padding:9px 14px} .dl .wk{padding-left:14px} .day .dh,.day .note,.day .rest{padding-left:14px; padding-right:14px}
+}
+.tag{font-size:11px; font-weight:500; color:var(--ink-3); background:var(--soft); border-radius:6px; padding:1px 6px}
+.tag.now{color:var(--accent); background:var(--accent-soft)}
+.tag.warn{color:var(--warn); background:var(--warn-soft)}
 
-.fixed{display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px}
-.fixed .fx{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-2);
-  background:var(--sunk); border:1px solid var(--line-2); border-radius:999px; padding:3px 9px}
-.fixed .fx b{font-weight:500; color:var(--ink-3)}
-.fixed .fx .fxt{color:var(--ink-3)}
-.fixed .fx.none{color:var(--ink-3); font-style:italic; background:transparent}
+.tick{appearance:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line); background:var(--card);
+  margin:1px 0 0; padding:0; display:grid; place-items:center}
+.tick:hover{border-color:var(--ink-3)}
+.tick[aria-checked="true"]{background:var(--ok); border-color:var(--ok)}
+.tick[aria-checked="true"]::after{content:""; width:5px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:translate(0,-1px) rotate(45deg)}
+.sp{width:20px}
 
-.grp{padding:12px 16px 13px; border-top:1px solid var(--line-2)}
-.grp .gh{display:flex; align-items:center; gap:8px}
-.grp .gh h4{font-size:13.5px}
-.grp .gh .slot{font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3);
-  border:1px dashed var(--line); border-radius:999px; padding:1px 7px}
-.grp .gh .code{font-size:11px; color:var(--ink-3); letter-spacing:.04em}
-.grp .gh .mins{margin-left:auto; font-size:12px; color:var(--ink-3)}
-.dnote{margin:-4px 16px 12px; font-size:12.5px; color:var(--ink-3); font-style:italic}
-.grp .why{margin:4px 0 0 17px; font-size:12.5px; color:var(--ink-3); max-width:56ch}
-.grp.off{color:var(--rose); font-size:12.5px; padding:10px 16px 12px}
-.blk{display:flex; gap:12px; margin-top:9px; padding-left:17px}
-.blk .tm{font-size:12px; color:var(--ink-2); white-space:nowrap; padding-top:1px; min-width:88px}
-.blk .wt{font-size:13.5px; color:var(--ink); max-width:52ch}
-.blk .topic{display:block; font-size:12px; color:var(--ink-3); margin-top:2px}
-.blk .fortag{display:block; font-size:11px; letter-spacing:.04em; color:var(--ink-3); margin-bottom:5px}
-.blk .it{display:flex; align-items:baseline; gap:7px; font-size:13px; margin-top:4px}
-.blk .it .k{font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3);
-  border:1px solid var(--line); border-radius:4px; padding:0 5px; flex:0 0 auto}
-.blk .it .k.lecture{color:var(--hst); border-color:var(--hst)}
-.blk .it .k.notes{color:var(--ink-3); border-style:dashed}
-.blk .it .m{margin-left:auto; font-size:11.5px; color:var(--ink-3); flex:0 0 auto}
-.foot-note{margin:0; font-size:12.5px; color:var(--ink-3); max-width:66ch}
+/* ---------- week ---------- */
+.day .dh{display:flex; align-items:baseline; gap:8px; padding:13px 18px 11px; border-bottom:1px solid var(--line)}
+.day .dh h3{font-size:15px}
+.day .dh .r{margin-left:auto; font-size:13px; color:var(--ink-3)}
+.day.today{border-color:var(--accent)}
+.day .note{padding:10px 18px 0; font-size:13px; color:var(--ink-3)}
+.day .rest{padding:14px 18px 16px; font-size:14px; color:var(--ink-2)}
+.day .rest ul{margin:8px 0 0; padding-left:18px; color:var(--ink-2); font-size:13.5px}
+.summary{display:flex; flex-wrap:wrap; gap:6px 16px; font-size:13px; color:var(--ink-2); padding:0 2px}
+.summary span{display:inline-flex; align-items:center; gap:6px}
 
-/* both, side by side */
-.cmp{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
-.cmp .ch, .cmp .cr{display:grid; grid-template-columns:76px 1fr 1fr; gap:1px; background:var(--line-2)}
-.cmp .ch{background:var(--sunk)}
-.cmp .ch span{padding:9px 14px; font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
-.cmp .cr{border-top:1px solid var(--line-2)}
-.cmp .cr.today .cd{color:var(--amber)}
-.cmp .cd, .cmp .cc{background:var(--panel); padding:11px 14px}
-.cmp .cd{display:flex; align-items:baseline; gap:7px; font-size:13px; color:var(--ink-2)}
-.cmp .cd .tgm{color:var(--rose)}
-.cmp .cb{display:flex; align-items:center; gap:8px; font-size:13px; padding:3px 0}
-.cmp .cb .tm{color:var(--ink-3); font-size:12px; min-width:44px}
-.cmp .cb .m{margin-left:auto; color:var(--ink-3); font-size:12px}
-.cmp .cb.tg{color:var(--rose)}
-@media(max-width:640px){.cmp .ch, .cmp .cr{grid-template-columns:54px 1fr 1fr}}
+/* ---------- deadlines ---------- */
+.dl .wk{padding:10px 18px 6px; font-size:12px; color:var(--ink-3); font-weight:500; border-top:1px solid var(--line)}
+.dl .wk:first-child{border-top:0}
+.item{display:grid; grid-template-columns:22px 1fr auto; gap:10px; padding:9px 18px; align-items:start}
+.item .t{font-size:14px; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+.item .d{font-size:12.5px; color:var(--ink-3); margin-top:1px}
+.item .left{font-size:12.5px; color:var(--ink-3); white-space:nowrap; padding-top:2px}
+.item .left.soon{color:var(--warn); font-weight:600}
+.item.done .t,.item.done .d{opacity:.45; text-decoration:line-through}
+.x{border:0; background:none; color:var(--ink-3); font-size:12px; padding:0 0 0 6px}
+.x:hover{color:var(--warn)}
+
+details.card>summary{padding:14px 18px; cursor:pointer; list-style:none; font-size:14px; font-weight:500; display:flex; align-items:center; gap:8px}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{content:"+"; margin-left:auto; color:var(--ink-3); font-size:18px; line-height:1}
+details.card[open]>summary::after{content:"–"}
+details.card .in{padding:0 18px 16px}
+.form{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.form .full{grid-column:1/-1}
+.form label{display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--ink-3)}
+.form input,.form select{background:var(--soft); border:1px solid var(--line); border-radius:9px; padding:8px 10px; font-size:14px; width:100%}
+.btn{border:0; background:var(--ink); color:var(--bg); border-radius:9px; padding:9px 14px; font-size:14px; font-weight:500}
+.btn.lite{background:var(--soft); color:var(--ink)}
+.rules{margin:4px 0 12px; padding-left:18px; font-size:13.5px; color:var(--ink-2)}
+.rules li{margin:3px 0}
+.rules b{color:var(--ink); font-weight:600}
+.ch{display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px; margin-top:10px}
+footer{margin-top:28px; font-size:12.5px; color:var(--ink-3); text-align:center}
 </style>
 </head>
 <body>
 
 
-<header class="top">
-  <div class="topbar">
-    <div class="mark">
-      <svg width="26" height="18" viewBox="0 0 26 18" fill="none" aria-hidden="true">
-        <ellipse cx="13" cy="9" rx="12" ry="6" stroke="var(--line)" stroke-width="1.2"/>
-        <circle cx="4.2" cy="6.2" r="3" fill="var(--amber)"/>
-        <circle cx="20.6" cy="11.4" r="3" fill="var(--rose)"/>
-      </svg>
-      <span class="wm">Tandem</span>
-      <span class="sub">Fall 2026 · NU</span>
-    </div>
-    <div class="seg" id="whoSeg" role="group" aria-label="Whose plan"></div>
-    <div class="seg" id="modeSeg" role="group" aria-label="Study intensity"></div>
+<header>
+  <div class="bar">
+    <span class="brand">Tandem</span>
+    <nav class="tabs" id="tabs"></nav>
+    <div class="who" id="who" role="group" aria-label="Whose plan"></div>
   </div>
-  <nav class="rail" id="nav"></nav>
 </header>
 
-<div class="shell">
+<div class="wrap">
   <main id="main"></main>
-  <footer>
-    <span id="syncBadge" class="sync"><i></i><span>local only</span></span>
-    <span>·</span>
-    <span id="fortune"></span>
-    <span style="margin-left:auto">made for two <span class="heart">♥</span></span>
-  </footer>
+  <footer id="foot">saved in this browser</footer>
 </div>
 
 <script>
 /* =========================================================================
-   DATA — everything below comes from the Fall 2026 syllabi + your timetables
+   COURSES + TIMETABLES
    ========================================================================= */
-
 const COURSES = {
-  phys:{name:'Physics I',   code:'PHYS 161', cls:'phys', staff:'E. Abdikamalov · M. Kaikanov · K. Oh',
-        weights:[['4 exams (17.5% each)',70],['Lab assignments',30]],
-        note:'No final exam. Grades are formula-only — no manual adjustments.'},
-  math:{name:'Calculus I',  code:'MATH 161', cls:'math', staff:'A. Tesfahun (Y, sec 1L) · A. Melnikov (L, sec 4L)',
-        weights:[['WeBWorK homework',20],['Exam I',40],['Exam II',40]],
-        note:'A missed exam can be replaced by the grade of the other exam (valid excuse only).'},
-  csci:{name:'Programming for Scientists and Engineers', code:'CSCI 151', cls:'csci', staff:'A. Cerone (Y) · A. Shomanov (L)',
-        weights:[], note:'No syllabus in hand yet — lab deadlines below are assumed weekly (Thu 21:00). Fix them once you have the real ones.'},
-  hst:{name:'History of Qazaqstan', code:'HST 100', cls:'hst', staff:'M. Arbuthnot · GTA M. Ramazanov',
-        weights:[['Weekly in-class assignments (best 10 of 13)',30],['Final exam (essay)',30],['Midterm',25],['Participation',15]],
-        note:'Attendance is 0% but 3 unexcused absences fail the course. Up to 2 extra points from guest-lecture responses.'}
+  phys:{name:'Physics',     code:'PHYS 161'},
+  math:{name:'Calculus',    code:'MATH 161'},
+  csci:{name:'Programming', code:'CSCI 151'},
+  hst: {name:'History',     code:'HST 100'}
 };
-
 const PEOPLE = {
-  y:{id:'y', name:'Yerkhat', courses:['phys','math','csci']},
-  l:{id:'l', name:'Lashyn',  courses:['phys','math','csci','hst']}
+  l:{id:'l', name:'Lashyn',  courses:['phys','math','csci','hst']},
+  y:{id:'y', name:'Yerkhat', courses:['phys','math','csci']}
 };
 
 /* weekday: 1=Mon … 7=Sun */
 const CLASSES = {
   y:[
-    {d:1,s:'09:00',e:'09:50',c:'csci',t:'CompLab 6',room:'7E.125/3',who:'O. Adiyatov'},
-    {d:1,s:'10:00',e:'10:50',c:'phys',t:'Lecture 3',room:'Orange Hall',who:'E. Abdikamalov'},
-    {d:1,s:'12:00',e:'14:50',c:'phys',t:'PhysLab 3',room:'9.222',who:'M. Tontayeva',labWeek:true},
-    {d:2,s:'09:00',e:'10:15',c:'csci',t:'Lecture 1',room:'3E.220',who:'A. Cerone'},
-    {d:2,s:'12:00',e:'13:15',c:'math',t:'Lecture 1',room:'Orange Hall',who:'A. Tesfahun'},
-    {d:3,s:'10:00',e:'10:50',c:'phys',t:'Lecture 3',room:'Orange Hall',who:'E. Abdikamalov'},
-    {d:4,s:'09:00',e:'10:15',c:'csci',t:'Lecture 1',room:'online',who:'A. Cerone'},
-    {d:4,s:'12:00',e:'13:15',c:'math',t:'Lecture 1',room:'Orange Hall',who:'A. Tesfahun'},
-    {d:4,s:'13:30',e:'14:45',c:'math',t:'Recitation 8',room:'5.103'},
-    {d:5,s:'10:00',e:'10:50',c:'phys',t:'Lecture 3',room:'Orange Hall',who:'E. Abdikamalov'},
-    {d:5,s:'11:00',e:'11:50',c:'phys',t:'Recitation 12',room:'7E.125/2',who:'B. Shukirgaliyev'}
+    {d:1,s:'09:00',e:'09:50',c:'csci',t:'CS lab',room:'7E.125/3'},
+    {d:1,s:'10:00',e:'10:50',c:'phys',t:'Physics lecture',room:'Orange Hall'},
+    {d:1,s:'12:00',e:'14:50',c:'phys',t:'Physics lab',room:'9.222',labWeek:true},
+    {d:2,s:'09:00',e:'10:15',c:'csci',t:'CS lecture',room:'3E.220'},
+    {d:2,s:'12:00',e:'13:15',c:'math',t:'Calculus lecture',room:'Orange Hall'},
+    {d:3,s:'10:00',e:'10:50',c:'phys',t:'Physics lecture',room:'Orange Hall'},
+    {d:4,s:'09:00',e:'10:15',c:'csci',t:'CS lecture',room:'online'},
+    {d:4,s:'12:00',e:'13:15',c:'math',t:'Calculus lecture',room:'Orange Hall'},
+    {d:4,s:'13:30',e:'14:45',c:'math',t:'Calculus recitation',room:'5.103'},
+    {d:5,s:'10:00',e:'10:50',c:'phys',t:'Physics lecture',room:'Orange Hall'},
+    {d:5,s:'11:00',e:'11:50',c:'phys',t:'Physics recitation',room:'7E.125/2'}
   ],
   l:[
-    {d:1,s:'09:00',e:'09:50',c:'csci',t:'CompLab 1',room:'7E.125/3',who:'I. Tursynbek'},
-    {d:1,s:'10:00',e:'10:50',c:'phys',t:'Lecture 3',room:'Orange Hall',who:'E. Abdikamalov'},
-    {d:1,s:'12:00',e:'14:50',c:'phys',t:'PhysLab 3',room:'9.222',who:'M. Tontayeva',labWeek:true},
-    {d:1,s:'15:00',e:'15:50',c:'math',t:'Lecture 4',room:'Orange Hall',who:'A. Melnikov'},
-    {d:2,s:'13:30',e:'14:45',c:'csci',t:'Lecture 4',room:'7E.429',who:'A. Shomanov'},
-    {d:3,s:'10:00',e:'10:50',c:'phys',t:'Lecture 3',room:'Orange Hall',who:'E. Abdikamalov'},
-    {d:3,s:'14:00',e:'14:50',c:'hst',t:'Seminar 17',room:'9.105',who:'M. Arbuthnot'},
-    {d:3,s:'15:00',e:'15:50',c:'math',t:'Lecture 4',room:'Orange Hall',who:'A. Melnikov'},
-    {d:4,s:'13:30',e:'14:45',c:'csci',t:'Lecture 4',room:'online',who:'A. Shomanov'},
-    {d:5,s:'10:00',e:'10:50',c:'phys',t:'Lecture 3',room:'Orange Hall',who:'E. Abdikamalov'},
-    {d:5,s:'11:00',e:'11:50',c:'phys',t:'Recitation 12',room:'7E.125/2',who:'B. Shukirgaliyev'},
-    {d:5,s:'14:00',e:'14:50',c:'math',t:'Recitation 6',room:'5.103',who:'A. Madiyeva'},
-    {d:5,s:'15:00',e:'15:50',c:'math',t:'Lecture 4',room:'Orange Hall',who:'A. Melnikov'}
+    {d:1,s:'09:00',e:'09:50',c:'csci',t:'CS lab',room:'7E.125/3'},
+    {d:1,s:'10:00',e:'10:50',c:'phys',t:'Physics lecture',room:'Orange Hall'},
+    {d:1,s:'12:00',e:'14:50',c:'phys',t:'Physics lab',room:'9.222',labWeek:true},
+    {d:1,s:'15:00',e:'15:50',c:'math',t:'Calculus lecture',room:'Orange Hall'},
+    {d:2,s:'13:30',e:'14:45',c:'csci',t:'CS lecture',room:'7E.429'},
+    {d:3,s:'10:00',e:'10:50',c:'phys',t:'Physics lecture',room:'Orange Hall'},
+    {d:3,s:'14:00',e:'14:50',c:'hst',t:'History seminar',room:'9.105'},
+    {d:3,s:'15:00',e:'15:50',c:'math',t:'Calculus lecture',room:'Orange Hall'},
+    {d:4,s:'13:30',e:'14:45',c:'csci',t:'CS lecture',room:'online'},
+    {d:5,s:'10:00',e:'10:50',c:'phys',t:'Physics lecture',room:'Orange Hall'},
+    {d:5,s:'11:00',e:'11:50',c:'phys',t:'Physics recitation',room:'7E.125/2'},
+    {d:5,s:'14:00',e:'14:50',c:'math',t:'Calculus recitation',room:'5.103'},
+    {d:5,s:'15:00',e:'15:50',c:'math',t:'Calculus lecture',room:'Orange Hall'}
   ]
 };
 
 /* =========================================================================
-   THE ROUTINE — a fixed weekly self-study schedule, two subjects a day.
-   Times are hand-fitted to the timetables above: nothing here collides with
-   a lecture, a seminar or the Monday lab. Recitations are deliberately
-   treated as free time and used for study (marked "recitation slot").
+   THE ROUTINE — index 0 is Monday.
+   Lashyn's is her own notebook plan, moved off her lectures:
+   no block overlaps a class, there is a lunch and a dinner gap,
+   nothing runs past 22:30, Sunday stays a rest day.
+   hst: which slice of the history load a block covers (see hstSlots).
+   nolab: different times in weeks without a physics lab.
+   slot: study done inside a recitation hour.
    ========================================================================= */
 const ROUTINE = {
-  y:[
-    {d:1, note:'Long teaching day — two blocks after it, then stop.', groups:[
-      {c:'phys', why:'Stage 2 of the lab is due next Monday 12:00 — write it while the numbers still mean something',
-       blocks:[['15:15','16:45','Fill the Excel template: calculations, error propagation, units']]},
-      {c:'csci', why:'The lab is due Thursday 21:00 — open it three days out, not the night before',
-       blocks:[['17:00','18:30','Read the spec, sketch the solution on paper, get a skeleton running']]}
+  l:[
+    {note:'Long class day. History fits between physics and the lab; the evening is calculus and CS.', blocks:[
+      {s:'11:00',e:'11:50',nolab:['11:00','12:45'],c:'hst',hst:'mon'},
+      {s:'16:00',e:'18:00',c:'math',what:"Straight after the lecture: rework it, then open this week's WeBWorK"},
+      {s:'18:45',e:'21:15',c:'csci',what:"Read this week's lab spec and get a first version running"},
+      {s:'21:30',e:'22:30',c:'phys',what:"Light only: re-read today's lecture and lab notes"}
     ]},
-    {d:2, note:'The afternoon is one long build.', groups:[
-      {c:'csci', why:'Main build day; Thursday is only for testing and submitting',
-       blocks:[['14:00','16:00','Write the core of the lab end to end']]},
-      {c:'math', why:'Your calculus lectures land Tue + Thu — do each one the same day',
-       blocks:[['16:15','17:45',"Rework today's lecture, then open WeBWorK"]]}
+    {note:'Free morning for calculus. History tonight is the last prep before tomorrow’s seminar.', blocks:[
+      {s:'09:00',e:'12:00',c:'math',what:'WeBWorK: aim to be half done by lunch'},
+      {s:'15:00',e:'17:30',c:'phys',what:"Problem set for this week's chapters"},
+      {s:'17:45',e:'19:15',c:'csci',what:'Fresh from the lecture: build the core of the lab'},
+      {s:'20:00',e:'22:00',c:'hst',hst:'consolidate'}
     ]},
-    {d:3, note:'Only one class — your biggest study day. Spend it on physics.', groups:[
-      {c:'phys', why:'Exams are 70% of the grade and they are built out of the problem sets',
-       blocks:[['11:15','13:00','Read the worked examples, then work the problem set'],
-               ['14:00','15:15','Second pass: only the problems you got wrong']]},
-      {c:'math', why:'WeBWorK is due Sunday — be half done by Wednesday night',
-       blocks:[['16:00','17:30','WeBWorK, first pass']]}
+    {note:'Seminar at 14:00. The graded assignment is its first 10 minutes.', blocks:[
+      {s:'11:15',e:'13:00',c:'hst',hst:'drill'},
+      {s:'16:00',e:'18:30',c:'math',what:"Rework today's lecture, keep going on WeBWorK"},
+      {s:'20:00',e:'22:30',c:'phys',lab:true,what:"Lab Stage 2: calculations, error propagation, units"}
     ]},
-    {d:4, note:'The recitation slot goes to closing the CS lab.', groups:[
-      {c:'csci', why:'Due tonight at 21:00', slot:true,
-       blocks:[['13:30','15:00','Test, fix, submit — do not let this reach 20:00']]},
-      {c:'phys', why:'Monday and Wednesday lectures are still fresh',
-       blocks:[['15:15','16:45','Problem set']]}
+    {note:'CS lab is due at 21:00. Submit it before dinner, not at 20:59.', blocks:[
+      {s:'09:00',e:'11:00',c:'hst',hst:'thu'},
+      {s:'11:15',e:'13:00',c:'csci',what:'Finish the lab'},
+      {s:'15:00',e:'16:00',c:'csci',what:'Test, fix and submit'},
+      {s:'16:15',e:'18:45',c:'math',what:'WeBWorK second pass'},
+      {s:'20:00',e:'22:30',c:'phys',what:'Problem set: the ones that did not work on Tuesday'}
     ]},
-    {d:5, note:'Study in the recitation slot. The evening is off — properly off.', groups:[
-      {c:'math', why:'WeBWorK due Sunday 23:59', slot:true,
-       blocks:[['11:00','12:30','Second pass — finish everything that is not stuck']]},
-      {c:'phys', why:'Redo, do not reread. Redoing is what the exam actually tests',
-       blocks:[['14:00','16:00','The ten hardest problems of the week, timed']]}
+    {note:'Physics morning and calculus afternoon are mostly classes. Short blocks around them.', blocks:[
+      {s:'09:00',e:'09:50',c:'phys',what:"Before the lecture: skim today's section, list what you don't get"},
+      {s:'12:45',e:'13:50',c:'math',what:'Mark the WeBWorK problems you are stuck on and bring them to the 14:00 recitation'},
+      {s:'17:00',e:'19:00',c:'csci',what:"Next week's lab spec, or fix what failed this week"},
+      {s:'20:00',e:'21:30',c:'hst',hst:'fri'}
     ]},
-    {d:6, note:'Late start. Two blocks, then the day is yours.', groups:[
-      {c:'math', why:'Close the homework before Sunday so Sunday stays light',
-       blocks:[['12:00','14:00','Finish WeBWorK, then 10 textbook exercises untimed']]},
-      {c:'csci', why:"Next week's lab always looks smaller on a Saturday",
-       blocks:[['15:00','16:30',"Read next week's lab spec and try the first step"]]}
+    {note:'No classes. Your long day: take the breaks between blocks.', blocks:[
+      {s:'09:00',e:'12:00',c:'math',what:'Finish WeBWorK (due Sunday 23:59), then textbook exercises'},
+      {s:'13:00',e:'16:00',c:'phys',what:'The hardest problems of the week, timed'},
+      {s:'16:15',e:'18:30',c:'csci',what:"Redo this week's lab from a blank file"},
+      {s:'20:00',e:'22:00',c:'hst',hst:'sat'}
     ]},
-    {d:7, note:'Reset day — read ahead so Monday is not a surprise.', groups:[
-      {c:'phys', why:'You cannot walk into the lab without having read the manual',
-       blocks:[['13:00','14:30',"Read Monday's lab manual, preview the week's chapters"]]},
-      {c:'math', why:'Submit before 23:59',
-       blocks:[['15:00','16:30','Submit WeBWorK, then look at what is due next week']]}
+    {rest:true, note:'Rest day.', checks:[
+      'WeBWorK submitted before 23:59',
+      'Physics Stage 2 ready for Monday 12:00 (lab weeks)',
+      'Only if something is unticked from the week, catch it up. Otherwise rest.'
     ]}
   ],
-  l:[
-    {d:1, note:'Longest teaching day — two short blocks tonight, nothing heavier.', groups:[
-      {c:'hst', why:'Last of the week’s reading — Wednesday’s assignment is closed-book', hst:'mon',
-       blocks:[['16:15','17:30','']]},
-      {c:'phys', why:'Stage 2 of the lab is due next Monday 12:00',
-       blocks:[['19:30','20:45','Fill the Excel template: calculations, error propagation, units']]}
+  y:[
+    {note:'Long teaching day. Two blocks after it, then stop.', blocks:[
+      {s:'15:15',e:'16:45',c:'phys',lab:true,what:'Lab Stage 2: calculations, error propagation, units'},
+      {s:'17:00',e:'18:30',c:'csci',what:'Read the lab spec, sketch it on paper, get a skeleton running'}
     ]},
-    {d:2, note:'The free morning is where history actually gets done.', groups:[
-      {c:'hst', why:'Everything must be read by tonight — tomorrow is only recall', hst:'consolidate',
-       blocks:[['09:30','11:00','']]},
-      {c:'math', why:'Lectures Mon/Wed/Fri — keep them inside the same week',
-       blocks:[['16:00','17:45','Rework the last two lectures, then WeBWorK']]}
+    {note:'The afternoon is one long build.', blocks:[
+      {s:'14:00',e:'16:00',c:'csci',what:'Write the core of the lab end to end'},
+      {s:'16:15',e:'17:45',c:'math',what:"Rework today's lecture, then WeBWorK"}
     ]},
-    {d:3, note:'Seminar day — the graded assignment is the first 10 minutes of it.', groups:[
-      {c:'hst', why:'Closed book, Lockdown Browser, a 100–200 word answer', hst:'drill',
-       blocks:[['11:15','12:00','Recall drill: define the week’s terms, one line of evidence per source']]},
-      {c:'csci', why:'Lab due Thursday 21:00',
-       blocks:[['16:15','18:15','Build the lab']]}
+    {note:'Only one class: the biggest study day.', blocks:[
+      {s:'11:15',e:'13:00',c:'phys',what:'Worked examples, then the problem set'},
+      {s:'14:00',e:'15:15',c:'phys',what:'Second pass: only the problems you got wrong'},
+      {s:'16:00',e:'17:30',c:'math',what:'WeBWorK, first pass'}
     ]},
-    {d:4, note:'Submit in the morning so the evening is not a deadline.', groups:[
-      {c:'csci', why:'Due tonight at 21:00',
-       blocks:[['09:30','11:30','Test, fix, submit']]},
-      {c:'phys', why:'Two lectures already this week and the problem set is waiting',
-       blocks:[['15:00','16:30',"This week's chapters + problem set"]]}
+    {note:'The recitation hour goes to closing the CS lab.', blocks:[
+      {s:'13:30',e:'15:00',c:'csci',slot:true,what:'Test, fix, submit (due 21:00)'},
+      {s:'15:15',e:'16:45',c:'phys',what:'Problem set'}
     ]},
-    {d:5, note:'Both recitation slots are study time. Evening off.', groups:[
-      {c:'math', why:'WeBWorK due Sunday 23:59', slot:true,
-       blocks:[['11:00','12:30','WeBWorK, first pass']]},
-      {c:'phys', why:'Redo, do not reread', slot:true,
-       blocks:[['13:15','14:45','The hardest problems of the week, timed']]}
+    {note:'Evening off.', blocks:[
+      {s:'11:00',e:'12:30',c:'math',slot:true,what:'WeBWorK second pass'},
+      {s:'14:00',e:'16:00',c:'phys',what:'The ten hardest problems of the week, timed'}
     ]},
-    {d:6, note:'Late start — physics while you are fresh, history after.', groups:[
-      {c:'phys', why:'Review before it piles up into an exam week',
-       blocks:[['12:00','14:00','The ten hardest problems of the week, timed']]},
-      {c:'hst', why:'Next week’s readings are long — take the first bite now', hst:'sat',
-       blocks:[['15:00','16:15','']]}
+    {note:'Late start. Two blocks, then the day is yours.', blocks:[
+      {s:'12:00',e:'14:00',c:'math',what:'Finish WeBWorK, then 10 textbook exercises'},
+      {s:'15:00',e:'16:30',c:'csci',what:"Read next week's lab spec, try the first step"}
     ]},
-    {d:7, note:'Reset day: a head start on history, then close calculus.', groups:[
-      {c:'hst', why:'Head start on Wednesday', hst:'sun',
-       blocks:[['13:00','14:30','']]},
-      {c:'math', why:'Submit before 23:59',
-       blocks:[['15:00','16:30','Finish and submit WeBWorK']]}
+    {note:'Reset day.', blocks:[
+      {s:'13:00',e:'14:30',c:'phys',what:"Read Monday's lab manual, preview the week"},
+      {s:'15:00',e:'16:30',c:'math',what:'Submit WeBWorK, look at next week'}
     ]}
   ]
 };
 
-/* the week's history material, cut into the four reading slots of the routine */
-function hstSplit(k){
-  const h=HST_WEEK[k];
-  const out={sat:[],sun:[],mon:[]};
-  if(!h) return out;
-  const items=h.lec.map(x=>({kind:'lecture',t:x[0],m:x[1]}))
-             .concat(h.read.map(x=>({kind:'reading',t:x[0],m:x[1]})));
-  const names=['sat','sun','mon'];
-  items.forEach((it,i)=>{ out[names[Math.floor(i*3/items.length)]].push(it); });
-  return out;
-}
-
-/* Semester weeks, keyed by Monday */
+/* =========================================================================
+   SEMESTER
+   ========================================================================= */
 const WEEKS = ['2026-08-17','2026-08-24','2026-08-31','2026-09-07','2026-09-14','2026-09-21','2026-09-28',
                '2026-10-05','2026-10-12','2026-10-19','2026-10-26','2026-11-02','2026-11-09','2026-11-16','2026-11-23'];
 const BREAK_WEEK = '2026-10-05';
-const HOLIDAYS = {'2026-10-26':'Republic Day holiday'};
+const HOLIDAYS = {'2026-10-26':'Republic Day, no classes'};
 
 const PHYS_WEEK = {
   '2026-08-17':{t:'Ch. 1 Units & Measurement · Ch. 2 Vectors'},
   '2026-08-24':{t:'Ch. 3 Straight-line motion · Ch. 4 Motion in 2D/3D', lab:{n:1,name:'Projectile motion'}},
   '2026-08-31':{t:"Ch. 5 Newton's laws · Ch. 6 Applications"},
-  '2026-09-07':{t:'Review & problem solving — Exam 1 (Ch. 1–6)', lab:{n:2,name:'Basic kinematics'}},
+  '2026-09-07':{t:'Review, Exam 1 (Ch. 1–6)', lab:{n:2,name:'Basic kinematics'}},
   '2026-09-14':{t:'Ch. 7 Work & KE · Ch. 8 Potential energy · Ch. 9 Momentum', lab:{n:3,name:'Ballistic pendulum'}},
   '2026-09-21':{t:'Ch. 10 Fixed-axis rotation · Ch. 11 Angular momentum', lab:{n:4,name:"Hooke's law"}},
-  '2026-09-28':{t:'Review & problem solving — Exam 2 (Ch. 7–11)', lab:{n:5,name:'Atwood machine'}},
+  '2026-09-28':{t:'Review, Exam 2 (Ch. 7–11)', lab:{n:5,name:'Atwood machine'}},
   '2026-10-12':{t:'Ch. 13 Gravitation · Ch. 15 Oscillations', lab:{n:6,name:'Rotational motion'}},
   '2026-10-19':{t:'Ch. 16 Waves', lab:{n:7,name:'Simple & physical pendulums'}},
   '2026-10-26':{t:'Ch. 17 Sound'},
-  '2026-11-02':{t:'Review & problem solving — Exam 3 (Ch. 13, 15–17)'},
+  '2026-11-02':{t:'Review, Exam 3 (Ch. 13, 15–17)'},
   '2026-11-09':{t:'Vol. 2 Ch. 1 Temperature & Heat · Ch. 2 Kinetic theory', lab:{n:8,name:'Calorimetry'}},
-  '2026-11-16':{t:'Vol. 2 Ch. 3 First law · Ch. 4 Second law of thermodynamics'},
-  '2026-11-23':{t:'Review — Exam 4 (all chapters)'}
+  '2026-11-16':{t:'Vol. 2 Ch. 3 First law · Ch. 4 Second law'},
+  '2026-11-23':{t:'Review, Exam 4 (all chapters)'}
 };
-
 const MATH_WEEK = {
   '2026-08-17':{t:'Limits (1.1–1.3)',hw:'HW0'},
   '2026-08-24':{t:'Continuity · tangent lines & rates of change (1.5, 1.6, 2.1)',hw:'HW1'},
-  '2026-08-31':{t:'Derivative function · differentiation techniques · product & quotient rules (2.2–2.4)',hw:'HW2'},
+  '2026-08-31':{t:'Derivative · differentiation rules (2.2–2.4)',hw:'HW2'},
   '2026-09-07':{t:'Trig derivatives · chain rule · implicit differentiation (2.5, 2.6, 3.1)',hw:'HW3'},
-  '2026-09-14':{t:'Log, exponential & inverse-trig derivatives · related rates (3.2–3.4)',hw:'HW4'},
-  '2026-09-21':{t:"Linear approximation · differentials · L'Hôpital · increase/decrease/concavity (3.5, 3.6, 4.1)",hw:'HW5'},
-  '2026-09-28':{t:'Relative extrema · graphing · rational functions · absolute max/min (4.2–4.4)'},
+  '2026-09-14':{t:'Log, exp & inverse-trig derivatives · related rates (3.2–3.4)',hw:'HW4'},
+  '2026-09-21':{t:"Linear approximation · L'Hôpital · increase/decrease (3.5, 3.6, 4.1)",hw:'HW5'},
+  '2026-09-28':{t:'Extrema · graphing · absolute max/min (4.2–4.4)'},
   '2026-10-12':{t:"Applied max/min · rectilinear motion · Newton's method (4.5–4.7)",hw:'HW6'},
-  '2026-10-19':{t:'Rolle · Mean Value theorem · area problem · indefinite integral (4.8, 5.1, 5.2)',hw:'HW7'},
+  '2026-10-19':{t:'Rolle · Mean Value theorem · indefinite integral (4.8, 5.1, 5.2)',hw:'HW7'},
   '2026-10-26':{t:'Integration by substitution (5.3)',hw:'HW8'},
-  '2026-11-02':{t:'Area as a limit · sigma notation · definite integral · FTC (5.4–5.6)',hw:'HW9'},
-  '2026-11-09':{t:'Rectilinear motion by integration · average value · definite integral by substitution (5.7–5.9)'},
+  '2026-11-02':{t:'Sigma notation · definite integral · FTC (5.4–5.6)',hw:'HW9'},
+  '2026-11-09':{t:'Average value · definite integral by substitution (5.7–5.9)'},
   '2026-11-16':{t:'Functions defined by integrals · integration by parts (5.10, 7.2)',hw:'HW10'},
-  '2026-11-23':{t:'Integrating trigonometric functions · review (7.3)'}
+  '2026-11-23':{t:'Integrating trig functions · review (7.3)'}
 };
-
 const HST_WEEK = {
   '2026-08-17':{t:'Introduction',lec:[],read:[]},
   '2026-08-24':{t:'The Mongol Conquests',
     lec:[['The Mongol Empire and the Golden Horde',40]],
-    read:[['Juvayni, History of the World Conqueror (extracts)',50],['The Secret History of the Mongols',50]]},
+    read:[['Juvayni, History of the World Conqueror',50],['The Secret History of the Mongols',50]]},
   '2026-08-31':{t:'The Qazaq Khanate',
-    lec:[['The Qazaq Khanate — part 1',30],['The Qazaq Khanate — part 2',30],['The Qazaq Khanate — part 3',30]],
-    read:[['Haydar Dughlat, Tarikh-i Rashidi (extracts)',50],['Amir Wali, Bahr al-asrar (extracts)',45]]},
+    lec:[['The Qazaq Khanate, part 1',30],['The Qazaq Khanate, part 2',30],['The Qazaq Khanate, part 3',30]],
+    read:[['Haydar Dughlat, Tarikh-i Rashidi',50],['Amir Wali, Bahr al-asrar',45]]},
   '2026-09-07':{t:'Qazaq–Russian Relations',
-    lec:[['The Qazaqs and the Jungars',40],['The Qazaqs and the Russian Empire in the early 18th century',40]],
-    read:[["Tevkelev, 'Account of Abu'l-Khayr Khan's Submission'",50],["Kirilov, 'The Kirgizes and Orenburg'",40]]},
+    lec:[['The Qazaqs and the Jungars',40],['The Qazaqs and the Russian Empire, early 18th c.',40]],
+    read:[["Tevkelev, Account of Abu'l-Khayr Khan's Submission",50],['Kirilov, The Kirgizes and Orenburg',40]]},
   '2026-09-14':{t:'Qazaq–Qing Relations',
     lec:[['The Qazaqs and the Qing Empire',40],['The Qazaqs and the Russian Empire, late 18th – early 19th c.',40]],
-    read:[['Letters from the Qazaq sultans to the Qing dynasty',45],['Noda, The Kazakh Khanates between the Russian and Qing Empires (extracts)',50]]},
+    read:[['Letters from the Qazaq sultans to the Qing dynasty',45],['Noda, The Kazakh Khanates between the Russian and Qing Empires',50]]},
   '2026-09-21':{t:'The Speransky Reforms and the Kenesary Rebellion',
     lec:[['The Speransky Reforms and the Kenesary Rebellion',40],["Kenesary's rebellion in Qazaq sources",35]],
-    read:[['Introduction of the Speransky Ustav',40],['Collection of Russian sources on Kenesary',45],["Sabol, 'Interpreting the Kenesary Kasymov Revolt'",50]]},
+    read:[['Introduction of the Speransky Ustav',40],['Russian sources on Kenesary',45],['Sabol, Interpreting the Kenesary Kasymov Revolt',50]]},
   '2026-09-28':{t:'Islam on the Qazaq Steppe',
-    lec:[['Islam on the Qazaq Steppe — part 1',35],['Islam on the Qazaq Steppe — part 2',35],['Islam on the Qazaq Steppe under Russian rule',40]],
-    read:[['Frank, Islamic Transformation on the Kazakh Steppe',50],["Barangavi, 'A Month among the Qazaqs'",40],['Qurban Ali Khalidi, An Islamic Biographical Dictionary of the Eastern Kazakh Steppe',45]]},
+    lec:[['Islam on the Qazaq Steppe, part 1',35],['Islam on the Qazaq Steppe, part 2',35],['Islam under Russian rule',40]],
+    read:[['Frank, Islamic Transformation on the Kazakh Steppe',50],['Barangavi, A Month among the Qazaqs',40],['Qurban Ali Khalidi, Biographical Dictionary',45]]},
   '2026-10-12':{t:'The Qazaq Intelligentsia',
-    lec:[['The Russian conquest of Central Asia',40],['Qazaq political elites under the Russian Empire',40],['The Qazaq intelligentsia',35]],
-    read:[['Campbell, ch. 3: An Imperial Biography of Ibray Altynsarin',50],["Valikhanov, 'On Islam in the Steppe' and 'Notes on Levshin'",45],["Sabol, 'Origin and Development of the Kazakh Intelligentsia'",45]]},
+    lec:[['The Russian conquest of Central Asia',40],['Qazaq political elites under the Empire',40],['The Qazaq intelligentsia',35]],
+    read:[['Campbell, ch. 3: Ibray Altynsarin',50],['Valikhanov, On Islam in the Steppe',45],['Sabol, Origin of the Kazakh Intelligentsia',45]]},
   '2026-10-19':{t:'Resettlement and the 1916 Revolt',
-    lec:[['Resettlement on the Qazaq steppe and its consequences',40],['WWI and the 1916 revolt',40]],
-    read:[["Pahlen, 'Mission to Turkestan'",45],['Kuropatkin (parts 1 and 2)',50],['The Karkaraly Petition',30],["Dulatov, 'Wake Up, Qazaq!'",30]]},
+    lec:[['Resettlement on the Qazaq steppe',40],['WWI and the 1916 revolt',40]],
+    read:[['Pahlen, Mission to Turkestan',45],['Kuropatkin, parts 1 and 2',50],['The Karkaraly Petition',30],['Dulatov, Wake Up, Qazaq!',30]]},
   '2026-10-26':{t:'The Qazaqs and the 1917 Revolution',
-    lec:[['The Qazaqs in the revolution and civil war — part 1',30],['part 2',30],['part 3',30],['part 4',30]],
-    read:[['Documents on the revolutionary and civil war periods',50],['Selections from Qazaq newspapers',40]]},
+    lec:[['Revolution and civil war, part 1',30],['part 2',30],['part 3',30],['part 4',30]],
+    read:[['Documents on the revolution and civil war',50],['Selections from Qazaq newspapers',40]]},
   '2026-11-02':{t:'Forming a Qazaq and Soviet Identity',
     lec:[['War communism and the NEP',40],['Early Soviet nationality policy',40]],
-    read:[["Baidil'din and Baitursynov, 'Two Views on the Adoption of the Latin Alphabet'",40],["Payne, 'The Forge of the Kazakh Proletariat'",50]]},
-  '2026-11-09':{t:'Collectivization and Famine on the Qazaq Steppe',
-    lec:[['Collectivization and famine — part 1',35],['part 2',35],['part 3',35]],
-    read:[["Nurtazina, 'The Great Famine of 1931–33 in Kazakhstan'",50],['Collection of documents on collectivization and the famine',45],['Payne, "Seeing Like a Soviet State"',45]]},
-  '2026-11-16':{t:'Destalinization and the Virgin Lands Campaign',
-    lec:[['The GULAG',35],['The Terror',35],['Ethnic deportations and WWII',35],['Destalinization and the Virgin Lands campaign',40]],
-    read:[["'Kamshat' (documentary film)",50],['Pohl, "The planet of one hundred languages"',50]]},
-  '2026-11-23':{t:'Qazaqstan in the Late Soviet Period',
-    lec:[['Environmental issues in Soviet Qazaqstan',40],['Late Soviet Qazaqstan (two parts)',50]],
-    read:[['Guth, USSR Incorporated versus Affirmative Action Empire?',50],["'Events of December 1986 in Alma-Ata' (documents)",40],["'Nevada-Semipalatinsk' (documentary film)",45]]}
+    read:[['Two Views on the Adoption of the Latin Alphabet',40],['Payne, The Forge of the Kazakh Proletariat',50]]},
+  '2026-11-09':{t:'Collectivization and Famine',
+    lec:[['Collectivization and famine, part 1',35],['part 2',35],['part 3',35]],
+    read:[['Nurtazina, The Great Famine of 1931–33',50],['Documents on collectivization and the famine',45],['Payne, Seeing Like a Soviet State',45]]},
+  '2026-11-16':{t:'Destalinization and the Virgin Lands',
+    lec:[['The GULAG',35],['The Terror',35],['Ethnic deportations and WWII',35],['Destalinization and Virgin Lands',40]],
+    read:[['Kamshat (documentary film)',50],['Pohl, The planet of one hundred languages',50]]},
+  '2026-11-23':{t:'Late Soviet Qazaqstan',
+    lec:[['Environmental issues in Soviet Qazaqstan',40],['Late Soviet Qazaqstan, two parts',50]],
+    read:[['Guth, USSR Incorporated',50],['Events of December 1986 in Alma-Ata',40],['Nevada-Semipalatinsk (documentary film)',45]]}
 };
 
-/* ---- deadline generation ---- */
+/* ---- deadlines ---- */
 function buildDeadlines(){
   const out=[];
-  const add=o=>out.push(Object.assign({people:['y','l'],est:1,assumed:false},o));
+  const add=o=>out.push(Object.assign({people:['y','l'],assumed:false,dur:0},o));
 
-  // PHYS labs: session Monday 12:00–14:50, Stage 1 in the room, Stage 2 one week later
   WEEKS.forEach(w=>{
     const lab=(PHYS_WEEK[w]||{}).lab; if(!lab) return;
-    add({id:'ph-l'+lab.n+'-s1', c:'phys', kind:'lab', title:`Lab ${lab.n} · ${lab.name} — Stage 1 (raw data)`,
-         due:w+'T14:50', est:0, note:'Excel template with your group\'s data, submitted before you leave the room.'});
-    add({id:'ph-l'+lab.n+'-s2', c:'phys', kind:'lab', title:`Lab ${lab.n} · ${lab.name} — Stage 2 (analysis)`,
-         due:dstr(addDays(parseD(w),7))+'T12:00', est:2,
-         note:'Same template with calculations + error propagation. No late submission, no re-submission, no extensions.'});
+    add({id:'ph-l'+lab.n+'-s2', c:'phys', kind:'lab', title:`Physics lab ${lab.n} Stage 2 · ${lab.name}`,
+         due:dstr(addDays(parseD(w),7))+'T12:00', note:'No late submission, no extensions.'});
   });
-  // PHYS exams — taken in the Friday 11:00 recitation
-  [['1','2026-09-11','Chapters 1–6'],['2','2026-10-02','Chapters 7–11 + earlier'],
-   ['3','2026-11-06','Chapters 13, 15–17 + earlier'],['4','2026-11-27','All chapters']].forEach(([n,d,scope])=>{
-    add({id:'ph-e'+n, c:'phys', kind:'exam', title:`Physics Exam ${n}`, due:d+'T11:00', est:8,
-         note:`${scope}. 40 min in Moodle, room 7E.125/2, Respondus LockDown. Bring your ID. 90% answer + 10% units format.`});
-  });
-  // MATH weekly WeBWorK — due date assumed Sunday 23:59
+  [['1','2026-09-11','Ch. 1–6'],['2','2026-10-02','Ch. 7–11'],['3','2026-11-06','Ch. 13, 15–17'],['4','2026-11-27','All chapters']]
+    .forEach(([n,d,scope])=>add({id:'ph-e'+n, c:'phys', kind:'exam', examN:n, title:`Physics Exam ${n}`, due:d+'T11:00', dur:40,
+      note:`${scope}. 40 min in the recitation, LockDown Browser, bring your ID.`}));
   WEEKS.forEach(w=>{
     const mk=MATH_WEEK[w]; if(!mk||!mk.hw) return;
-    add({id:'ma-'+mk.hw, c:'math', kind:'hw', title:`WeBWorK ${mk.hw}`, due:dstr(addDays(parseD(w),6))+'T23:59',
-         est:2.5, assumed:true, note:mk.t});
+    add({id:'ma-'+mk.hw, c:'math', kind:'hw', title:`WeBWorK ${mk.hw}`, due:dstr(addDays(parseD(w),6))+'T23:59', assumed:true, note:mk.t});
   });
-  add({id:'ma-e1', c:'math', kind:'exam', title:'Calculus Exam I', due:'2026-10-03T10:00', est:9,
-       note:'Chapters 1–3. No calculators, no AI. 40% of the course grade.'});
-  add({id:'ma-e2', c:'math', kind:'exam', title:'Calculus Exam II', due:'2026-11-28T10:00', est:9,
-       note:'Ch. 4, 5 and sections 7.2, 7.3. 40% of the course grade.'});
-  // CSCI weekly lab — assumed Thursday 21:00
+  add({id:'ma-e1', c:'math', kind:'exam', examN:'I', title:'Calculus Exam I', due:'2026-10-03T10:00', dur:120, note:'Chapters 1–3. No calculators.'});
+  add({id:'ma-e2', c:'math', kind:'exam', examN:'II', title:'Calculus Exam II', due:'2026-11-28T10:00', dur:120, note:'Ch. 4, 5, 7.2, 7.3.'});
   let labN=1;
   WEEKS.forEach(w=>{
     if(w===BREAK_WEEK||w==='2026-08-17') return;
-    add({id:'cs-lab'+labN, c:'csci', kind:'lab', title:`CS lab ${labN} report`, due:dstr(addDays(parseD(w),3))+'T21:00',
-         est:3, assumed:true, note:'Deadline assumed weekly (Thu 21:00) — correct it when you have the real one.'});
+    add({id:'cs-lab'+labN, c:'csci', kind:'lab', title:`CS lab ${labN}`, due:dstr(addDays(parseD(w),3))+'T21:00', assumed:true});
     labN++;
   });
-  // HST — Lashyn only
   WEEKS.forEach(w=>{
     const h=HST_WEEK[w]; if(!h||w===BREAK_WEEK||w==='2026-08-17') return;
-    add({id:'hs-w'+w, c:'hst', kind:'quiz', people:['l'], title:`Weekly in-class assignment — ${h.t}`,
-         due:dstr(addDays(parseD(w),2))+'T14:00', est:0,
-         note:'First 10 minutes of the seminar, Lockdown Browser, phone on the front desk. Best 10 of 13 count.'});
+    add({id:'hs-w'+w, c:'hst', kind:'quiz', people:['l'], title:`History in-class assignment · ${h.t}`,
+         due:dstr(addDays(parseD(w),2))+'T14:00', note:'First 10 minutes of the seminar. Best 10 of 13 count.'});
   });
-  add({id:'hs-mid', c:'hst', kind:'exam', people:['l'], title:'History midterm', due:'2026-10-03T14:00', est:8,
-       note:'In person. Thesis + 3 arguments + 1 counterargument + evidence for two questions out of three. You do not write the essay itself.'});
-  add({id:'hs-fin', c:'hst', kind:'exam', people:['l'], title:'History final essay exam (date TBA)', due:'2026-12-12T10:00', est:10, assumed:true,
-       note:'Analytical essay on anything from the whole semester. Date announced later — this is a placeholder.'});
+  add({id:'hs-mid', c:'hst', kind:'exam', people:['l'], title:'History midterm', due:'2026-10-03T14:00', dur:120,
+       note:'Thesis + 3 arguments + 1 counterargument + evidence, for two questions of three.'});
+  add({id:'hs-fin', c:'hst', kind:'exam', people:['l'], title:'History final essay exam', due:'2026-12-12T10:00', dur:120, assumed:true,
+       note:'Date announced later.'});
   return out.sort((a,b)=>a.due<b.due?-1:1);
 }
+
+const RULES={
+  phys:['Exams are 40 minutes inside the <b>Friday 11:00 recitation</b>. Four exams, 17.5% each, no final.',
+        'Answers are <b>90% number, 10% units</b>. Right number in the wrong format scores zero.',
+        'Lab Stage 1 is submitted in the room; <b>Stage 2 one week later, Monday 12:00</b>. No extensions.',
+        'More than 10 minutes late to the lab means no entry and a zero.'],
+  math:['<b>No calculators</b> in exams, no AI anywhere in the course.',
+        'Two exams at 40% each; WeBWorK 20%. The Sunday due dates here are assumed.'],
+  csci:['No syllabus loaded yet. The Thursday 21:00 lab deadline is an assumption. Fix it in Deadlines.'],
+  hst:['The weekly assignment link <b>closes 10 minutes after the seminar starts</b>. Phones on the front desk.',
+       '<b>3 unexcused absences fail the course.</b>',
+       'AI is banned outright, including grammar fixing and translation.',
+       'Midterm: for two of three questions give a thesis, 3 arguments, 1 counterargument, each with evidence.']
+};
 
 /* =========================================================================
    HELPERS
    ========================================================================= */
 const pad=n=>String(n).padStart(2,'0');
 const toMin=s=>{const p=s.split(':');return +p[0]*60 + +p[1]};
-const toHM=m=>pad(Math.floor(m/60))+':'+pad(Math.round(m%60));
+const toHM=m=>pad(Math.floor(m/60))+':'+pad(m%60);
 const dstr=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 const parseD=s=>{const p=s.split('-').map(Number);return new Date(p[0],p[1]-1,p[2])};
 const parseDT=s=>{const [d,t]=s.split('T');const a=d.split('-').map(Number);const b=(t||'00:00').split(':').map(Number);
   return new Date(a[0],a[1]-1,a[2],b[0],b[1])};
 const addDays=(d,n)=>{const x=new Date(d.getTime()); x.setDate(x.getDate()+n); return x};
-const mondayOf=d=>addDays(d,-((d.getDay()+6)%7));
-const dow=d=>((d.getDay()+6)%7)+1;                       // 1=Mon … 7=Sun
+const mondayOf=d=>{const x=addDays(d,-((d.getDay()+6)%7)); x.setHours(0,0,0,0); return x};
+const dow=d=>((d.getDay()+6)%7)+1;
 const DAYN=['','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const fmtD=d=>DAYN[dow(d)].slice(0,3)+' '+d.getDate()+' '+MON[d.getMonth()];
-const short=(s,n)=>{ s=String(s).replace(/\s*\([^)]*\)\s*$/,''); if(s.length<=n) return s;
-  const cut=s.slice(0,n); const sp=cut.lastIndexOf(' '); return (sp>n*0.55?cut.slice(0,sp):cut)+'…'; };
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const hrs=m=>m>=60?(m%60?Math.floor(m/60)+'h '+(m%60)+'m':Math.floor(m/60)+'h'):m+'m';
+const dayStart=d=>{const x=new Date(d.getTime()); x.setHours(0,0,0,0); return x};
 function weekKey(d){const m=dstr(mondayOf(d)); return WEEKS.includes(m)?m:null}
 function weekNo(k){const i=WEEKS.indexOf(k); return i<0?null:i+1}
 function isLabWeek(k){return !!((PHYS_WEEK[k]||{}).lab)}
+function nextWeekKey(k){const i=WEEKS.indexOf(k); if(i<0) return null; let j=i+1; if(WEEKS[j]===BREAK_WEEK) j++; return WEEKS[j]||null}
 function untilTxt(due){
   const ms=parseDT(due)-NOW;
-  if(ms<0) return {txt:'passed', cls:''};
+  if(ms<0) return {txt:'passed', soon:false};
   const h=ms/36e5;
-  if(h<24) return {txt:h<1?Math.round(h*60)+' min':Math.round(h)+' h', cls:'crit'};
-  const d=Math.round(h/24);
-  return {txt:d+' day'+(d===1?'':'s'), cls:d<=3?'warn':d<=10?'':'ok'};
+  if(h<24) return {txt:h<1?Math.max(1,Math.round(h*60))+' min':Math.round(h)+' h', soon:true};
+  const days=Math.round((dayStart(parseDT(due))-dayStart(NOW))/864e5);
+  return {txt:days===1?'tomorrow':'in '+days+' days', soon:days<=2};
 }
 
 /* =========================================================================
-   STATE — shared through the artifact db when available, local otherwise
+   STATE
    ========================================================================= */
 const LS='tandem.v1';
-let DB=null, unsub=null, writeTimer=null;
-let S = {done:{}, custom:[], pushes:null, notes:{y:'',l:''}, mode:'A', rev:0};
-
-function loadLocal(){
-  try{const raw=localStorage.getItem(LS); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
-  if(!S.pushes) S.pushes=[{id:'p1',title:'Physics problem set — Exam 1 push',unit:'problems',total:150,done:0,due:'2026-09-11',c:'phys',people:'both'}];
-}
+let DB=null, writeTimer=null;
+let S={done:{}, custom:[], rev:0};
+function loadLocal(){ try{const raw=localStorage.getItem(LS); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){} }
 function saveLocal(){ try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){} }
 function persist(){
   S.rev=(S.rev||0)+1; saveLocal();
@@ -744,748 +503,310 @@ async function initDB(){
   try{ db = window.claude && claude.use ? await claude.use('db') : null; }catch(e){ db=null; }
   if(!db) return;
   DB=db;
-  const badge=document.getElementById('syncBadge');
-  badge.classList.add('live'); badge.lastElementChild.textContent='synced with each other';
+  document.getElementById('foot').textContent='synced between you two';
   DB.doc('state/shared').onSnapshot(snap=>{
     if(!snap.exists){ DB.doc('state/shared').set(JSON.parse(JSON.stringify(S))).catch(()=>{}); return; }
-    const remote=snap.data();
     if(snap.metadata.hasPendingWrites) return;
+    const remote=snap.data();
     if((remote.rev||0)>=(S.rev||0)){ S=Object.assign(S,remote); saveLocal(); render(); }
-  }, ()=>{ badge.classList.remove('live'); badge.lastElementChild.textContent='local only'; });
+  }, ()=>{ document.getElementById('foot').textContent='saved in this browser'; });
 }
-
-/* =========================================================================
-   THE PLANNER
-   ========================================================================= */
-const MODES={
-  A:{label:'Steady', hint:'2h physics · 1.5h CS · 1.5h calculus', per:{phys:120,math:90,csci:90,hst:60}},
-  B:{label:'Push',   hint:'3h physics · 2h CS · 2h calculus',     per:{phys:180,math:120,csci:120,hst:90}}
-};
-const DAY_FACTOR={1:1,2:1,3:1,4:1,5:.9,6:.7,7:.55};
-const DAY_START=8*60+30, DAY_END=22*60+30;
-const MEALS=[[13*60,13*60+45],[18*60+45,19*60+30]];
-
-function classesOn(p,date){
-  const k=weekKey(date), lab=k?isLabWeek(k):false, dd=dow(date);
-  if(k===BREAK_WEEK||!k) return [];
-  return CLASSES[p].filter(c=>c.d===dd && (!c.labWeek || lab))
-    .map(c=>Object.assign({},c,{sm:toMin(c.s),em:toMin(c.e)}))
-    .sort((a,b)=>a.sm-b.sm);
-}
-function freeWindows(p,date,extraBusy){
-  const busy=classesOn(p,date).map(c=>[c.sm-10,c.em+10]).concat(MEALS).concat(extraBusy||[]);
-  busy.sort((a,b)=>a[0]-b[0]);
-  const out=[]; let cur=DAY_START;
-  busy.forEach(([s,e])=>{ if(s>cur) out.push({s:cur,e:Math.min(s,DAY_END)}); cur=Math.max(cur,e); });
-  if(cur<DAY_END) out.push({s:cur,e:DAY_END});
-  return out.filter(w=>w.e-w.s>=40);
-}
-function overlapWindows(a,b){
-  const out=[];
-  a.forEach(x=>b.forEach(y=>{const s=Math.max(x.s,y.s),e=Math.min(x.e,y.e); if(e-s>=45) out.push({s,e});}));
-  return out.sort((x,y)=>x.s-y.s);
-}
-/* the shared slot: latest evening overlap that fits 75 minutes */
-function togetherSlot(date){
-  const k=weekKey(date); if(!k||k===BREAK_WEEK) return null;
-  if(dow(date)===6) return null;                       // Saturday evening is off the clock
-  const wins=overlapWindows(freeWindows('y',date),freeWindows('l',date))
-    .map(w=>({s:Math.max(w.s,16*60),e:Math.min(w.e,22*60)})).filter(w=>w.e-w.s>=75);
-  if(!wins.length) return null;
-  const w=wins[wins.length-1];
-  return {s:w.e-75, e:w.e};
-}
-/* which subject the two of them should sit down with together */
-function togetherSubject(date){
-  const soon=allItems().filter(it=>it.people.length===2 && !isDone(it.id))
-    .map(it=>({it,h:(parseDT(it.due)-date)/36e5})).filter(x=>x.h>-12 && x.h<24*6)
-    .sort((a,b)=>a.h-b.h);
-  const exam=soon.find(x=>x.it.kind==='exam');
-  if(exam) return exam.it.c;
-  return 'phys';
-}
-/* pick what a subject's block is actually about, on a given day */
-function subjectFocus(p,c,date){
-  const k=weekKey(date);
-  const next=allItems().filter(it=>it.c===c && it.people.includes(p) && !isDone(it.id) && it.est>0 && parseDT(it.due)>=date)
-    .sort((a,b)=>a.due<b.due?-1:1)[0];
-  let title='', why='';
-  if(next){
-    const u=untilTxt(next.due);
-    title=next.title;
-    why=(next.kind==='exam'?'Exam in ':'Due in ')+u.txt+' · '+fmtD(parseDT(next.due))+' '+next.due.slice(11);
-  }
-  const topic = c==='phys' ? (PHYS_WEEK[k]||{}).t : c==='math' ? (MATH_WEEK[k]||{}).t : c==='hst' ? (HST_WEEK[k]||{}).t : null;
-  if(!next){ title = topic || COURSES[c].name; why='Stay ahead of this week'; }
-  if(c==='hst'){
-    const sem=addDays(parseD(k||dstr(date)),2);
-    title = topic || title;
-    why = 'Lectures + readings before the seminar · Wed '+sem.getDate()+' '+MON[sem.getMonth()]+' 14:00';
-  }
-  return {title, why, topic, next};
-}
-function subjectUrgency(p,c,date){
-  const f=subjectFocus(p,c,date); if(!f.next) return 1;
-  const h=(parseDT(f.next.due)-date)/36e5;
-  let u = h<24?1.6 : h<48?1.4 : h<96?1.2 : h<24*8?1.05 : .9;
-  if(f.next.kind==='exam' && h<24*8) u=Math.max(u,1.45);
-  return u;
-}
-function planDay(p,date,mode){
-  const k=weekKey(date);
-  const res={blocks:[], unfit:[], classes:classesOn(p,date), holiday:HOLIDAYS[dstr(date)]||null,
-             breakWeek:k===BREAK_WEEK, offSemester:!k};
-  if(!k||k===BREAK_WEEK) return res;
-
-  const tg=togetherSlot(date), tgSub=tg?togetherSubject(date):null;
-  const tgMine = tg && PEOPLE[p].courses.includes(tgSub) ? tg : null;
-  const wins=freeWindows(p,date, tgMine?[[tgMine.s,tgMine.e]]:[]);
-
-  const f=DAY_FACTOR[dow(date)];
-  const subs=PEOPLE[p].courses.map(c=>{
-    const u=subjectUrgency(p,c,date);
-    return {c, u, min:Math.round(MODES[mode].per[c]*f*u/5)*5};
-  }).sort((a,b)=>b.u-a.u);
-
-  if(tgMine){ const s=subs.find(x=>x.c===tgSub); if(s) s.min=Math.max(0,s.min-75); }
-
-  const slots=wins.map(w=>({s:w.s,e:w.e,cur:w.s}));
-  const roomOf=s=>s.e-s.cur;
-  const place=(minutes,dir)=>{
-    let left=minutes, placed=[], minStart=DAY_START, prefer=null;
-    while(left>=40){
-      let size=Math.min(90,left);
-      if(left-size<40) size=Math.min(105,left);            // never leave an orphan 20-minute tail
-      const fits=s=>roomOf(s)>=Math.min(size,75) && s.cur>=minStart;
-      let slot=(prefer&&fits(prefer))?prefer:dir(slots.filter(fits));
-      if(!slot) slot=dir(slots.filter(s=>roomOf(s)>=45 && s.cur>=minStart));
-      if(!slot) slot=dir(slots.filter(s=>roomOf(s)>=45));
-      if(!slot) break;
-      const len=Math.min(size, roomOf(slot));
-      if(len<40) break;
-      placed.push({start:slot.cur,end:slot.cur+len});
-      slot.cur+=len+15; left-=len; prefer=slot; minStart=slot.cur;   // the day moves forward
-    }
-    return {placed,left};
-  };
-  const early=arr=>arr[0];
-  const late =arr=>arr[arr.length-1];
-
-  subs.forEach(sub=>{
-    if(sub.min<30) return;
-    const foc=subjectFocus(p,sub.c,date);
-    const r=place(sub.min, sub.c==='hst'?late:early);
-    r.placed.forEach(b=>res.blocks.push({
-      c:sub.c, start:b.start, end:b.end, title:foc.title, why:foc.why, topic:foc.topic, together:false
-    }));
-    if(r.left>=40) res.unfit.push({c:sub.c, min:r.left, title:foc.title});
-  });
-
-  if(tgMine){
-    const foc=subjectFocus(p,tgSub,date);
-    res.blocks.push({c:tgSub, start:tgMine.s, end:tgMine.e, together:true,
-      title:foc.title, why:'Same desk, same problem set — you two vs. this one', topic:foc.topic});
-  }
-  res.blocks.sort((a,b)=>a.start-b.start);
-  res.blocks.forEach((b,i)=>b.key='blk:'+p+':'+dstr(date)+':'+i);
-  return res;
-}
-
-/* =========================================================================
-   ITEMS (generated + custom)
-   ========================================================================= */
 const GEN=buildDeadlines();
 function allItems(){
-  const custom=(S.custom||[]).map(c=>Object.assign({est:1.5,kind:'task',assumed:false,note:''},c,{custom:true}));
-  return GEN.concat(custom).sort((a,b)=>a.due<b.due?-1:1);
+  return GEN.concat((S.custom||[]).map(c=>Object.assign({kind:'task',assumed:false,note:'',dur:0},c,{custom:true})))
+    .sort((a,b)=>a.due<b.due?-1:1);
 }
-function isDone(id){return !!S.done[id]}
+const isDone=id=>!!(S.done&&S.done[id]);
 function toggleDone(id){ if(S.done[id]) delete S.done[id]; else S.done[id]=Date.now(); persist(); render(); }
 
-/* history chunks for a given week */
-function hstChunks(k){
-  const h=HST_WEEK[k]; if(!h) return [];
+/* =========================================================================
+   ONE DAY FOR ONE PERSON: classes, exams and study blocks
+   ========================================================================= */
+function classesOn(p,date){
+  const k=weekKey(date);
+  if(!k||k===BREAK_WEEK||HOLIDAYS[dstr(date)]) return [];
+  const lab=isLabWeek(k);
+  return CLASSES[p].filter(c=>c.d===dow(date) && (!c.labWeek||lab))
+    .map(c=>Object.assign({},c,{sm:toMin(c.s),em:toMin(c.e)}));
+}
+function examsOn(p,date){
+  return allItems().filter(it=>it.kind==='exam' && it.people.includes(p) && it.due.slice(0,10)===dstr(date))
+    .map(it=>{const sm=toMin(it.due.slice(11)); return Object.assign({},it,{sm, em:sm+(it.dur||90)});});
+}
+
+/* the week's history load, spread over the four reading blocks before the seminar */
+const HST_ORDER=['thu','fri','sat','mon'];
+function hstSlots(k){
+  const h=HST_WEEK[k], out={thu:[],fri:[],sat:[],mon:[]};
+  if(!h) return out;
   const items=h.lec.map(x=>({kind:'lecture',t:x[0],m:x[1]})).concat(h.read.map(x=>({kind:'reading',t:x[0],m:x[1]})));
-  if(!items.length) return [];
-  // six evenings before Wednesday's seminar: Thu, Fri, Sat, Sun, Mon, Tue
-  const seminar=addDays(parseD(k),2);
-  const days=[-6,-5,-4,-3,-2,-1].map(n=>addDays(seminar,n));
-  const per=Math.ceil(items.length/5);
-  const out=[]; let di=0, count=0;
-  items.forEach((it,i)=>{
-    if(count>=per && di<4){ di++; count=0; }
-    out.push(Object.assign({},it,{day:days[di], id:'hst:'+k+':'+i}));
-    count++;
-  });
-  out.push({kind:'drill', t:'Recall drill: define the week\'s terms, one line of evidence per source', m:25,
-            day:days[5], id:'hst:'+k+':drill'});
+  items.forEach((it,i)=>out[HST_ORDER[Math.floor(i*4/items.length)]].push(it));
   return out;
+}
+/* Thu/Fri/Sat read ahead for next week's seminar; Mon/Tue/Wed finish this week's */
+function hstTarget(slot,k){ return (slot==='thu'||slot==='fri'||slot==='sat') ? nextWeekKey(k) : k; }
+
+const PREP={
+  phys:'Timed problems from the chapters on the exam. Check the units on every answer',
+  math:'Past-exam problems with no calculator, then redo the ones you missed',
+  hst:'Midterm drill: for each likely question write a thesis, 3 arguments, 1 counterargument and the evidence'
+};
+
+function blocksOn(p,date){
+  const i=dow(date)-1, day=ROUTINE[p][i], k=weekKey(date);
+  if(!day||day.rest) return [];
+  const lab=k?isLabWeek(k):false;
+  const exams=allItems().filter(it=>it.kind==='exam' && it.people.includes(p));
+  return day.blocks.map((b,bi)=>{
+    const [s,e]=(!lab && b.nolab) ? b.nolab : [b.s,b.e];
+    const start=parseDT(dstr(date)+'T'+s);
+    const out={c:b.c, sm:toMin(s), em:toMin(e), s, e, slot:!!b.slot, key:'rt:'+p+':'+dstr(date)+':'+bi,
+               what:b.what||'', list:null, tag:null};
+
+    // an exam coming up in this subject changes what the block is for
+    const ex=exams.find(x=>x.c===b.c && parseDT(x.due)>start && (dayStart(parseDT(x.due))-dayStart(date))/864e5<=6);
+    const exDays=ex?Math.round((dayStart(parseDT(ex.due))-dayStart(date))/864e5):null;
+
+    if(b.hst){
+      const tk=hstTarget(b.hst,k);
+      const sem=tk?addDays(parseD(tk),2):null;
+      if(ex && exDays<=3 && HST_ORDER.includes(b.hst) && b.hst!=='mon'){
+        out.what=PREP.hst; out.tag={t:ex.title+(exDays===0?' today':exDays===1?' tomorrow':' in '+exDays+' days'), warn:true};
+      }else if(b.hst==='drill'){
+        out.what='Closed-book recall: define the week’s terms, one line of evidence per source, then write a 150-word answer';
+        out.tag={t:'seminar 14:00'};
+      }else if(b.hst==='consolidate'){
+        out.what='Finish any reading left, write the week’s terms, draft the answer you would give tomorrow';
+      }else if(tk && HST_WEEK[tk] && HST_WEEK[tk].lec.length){
+        out.list=hstSlots(tk)[b.hst];
+        out.what='For '+DAYN[3].slice(0,3)+' '+sem.getDate()+' '+MON[sem.getMonth()]+': '+HST_WEEK[tk].t;
+        if(!out.list.length) out.what+=' · re-read your notes';
+      }else{
+        out.what='Go back over your notes from earlier weeks';
+      }
+      return out;
+    }
+    if(ex && PREP[b.c]){
+      out.what = exDays===0 ? 'Light review only. Formulas and definitions, nothing new' : PREP[b.c];
+      out.tag = {t:ex.title+(exDays===0?' today':exDays===1?' tomorrow':' in '+exDays+' days'), warn:true};
+      if(b.lab && lab) out.what+='. Stage 2 of Monday’s lab is still due';
+    }else if(b.c==='phys' && k && PHYS_WEEK[k]){
+      out.topic=PHYS_WEEK[k].t;
+    }else if(b.c==='math' && k && MATH_WEEK[k]){
+      out.topic=MATH_WEEK[k].t;
+    }
+    return out;
+  });
+}
+
+function dayPlan(p,date){
+  const classes=classesOn(p,date), exams=examsOn(p,date);
+  const blocks=blocksOn(p,date);
+  // a recitation used as a study slot is not shown as a class; an exam replaces the class it sits in
+  const shownClasses=classes.filter(c=>
+    !blocks.some(b=>b.slot && b.sm<c.em && c.sm<b.em) &&
+    !exams.some(x=>x.sm<c.em && c.sm<x.em));
+  // study blocks that collide with an exam are skipped that day
+  blocks.forEach(b=>{ if(exams.some(x=>b.sm<x.em+15 && x.sm-15<b.em)) b.skip=true; });
+  return {classes:shownClasses, exams, blocks, rest:!!(ROUTINE[p][dow(date)-1]||{}).rest,
+          routine:ROUTINE[p][dow(date)-1]};
 }
 
 /* =========================================================================
-   VIEWS
+   RENDERING
    ========================================================================= */
-const VIEWS=[
-  {id:'plan',  em:'🧭', label:'Self-study'},
-  {id:'today', em:'🌙', label:'Today'},
-  {id:'week',  em:'🗓️', label:'This week'},
-  {id:'due',   em:'⏳', label:'Deadlines'},
-  {id:'hist',  em:'📖', label:'History load'},
-  {id:'push',  em:'🎯', label:'Big pushes'},
-  {id:'ref',   em:'📚', label:'Courses'}
-];
-let VIEW='plan', WHO='y';
-let NOW=new Date();
+let VIEW='today', WHO='l', NOW=new Date();
+try{ const w=localStorage.getItem('tandem.who'); if(w==='y'||w==='l') WHO=w; }catch(e){}
 
-const FORTUNES=[
-  'the semester is long; you are two',
-  'physics is easier at the same table',
-  'read the manual before you touch the equipment',
-  'she reads, you solve, then swap',
-  'nothing due tonight is worth 3 a.m.',
-  'coffee counts as a study block'
-];
+const tick=(id,done)=>'<button class="tick" role="checkbox" aria-checked="'+done+'" data-tick="'+id+'" aria-label="Mark done"></button>';
 
-function courseDot(c){return '<span class="dot c-'+c+'"></span>'}
-function personChips(list){
-  return list.map(p=>'<span class="chip">'+PEOPLE[p].name+'</span>').join('');
+function rowsHtml(p,date,pl,live){
+  const nowMin=NOW.getHours()*60+NOW.getMinutes();
+  const rows=[];
+  pl.classes.forEach(c=>rows.push({sm:c.sm, html:
+    '<div class="row cls"><span class="sp"></span><span class="tm n">'+c.s+'–'+c.e+'</span><div>'
+    +'<div class="sub"><span class="dot c-'+c.c+'"></span>'+esc(c.t)+'</div>'
+    +'<div class="what faint">'+esc(c.room)+'</div></div></div>'}));
+  pl.exams.forEach(x=>rows.push({sm:x.sm-1, html:
+    '<div class="row exam"><span class="sp"></span><span class="tm n">'+toHM(x.sm)+'</span><div>'
+    +'<div class="sub"><span class="dot c-'+x.c+'"></span>'+esc(x.title)+'</div>'
+    +'<div class="what">'+esc(x.note||'')+'</div></div></div>'}));
+  let nextMarked=false;
+  pl.blocks.forEach(b=>{
+    const done=isDone(b.key);
+    let cls='row'; let state='';
+    if(b.skip) cls+=' skip';
+    if(done) cls+=' done';
+    if(live && !b.skip && !done){
+      if(nowMin>=b.sm && nowMin<b.em){ cls+=' now'; state='<span class="tag now">now</span>'; nextMarked=true; }
+      else if(!nextMarked && b.sm>nowMin){ state='<span class="tag now">next</span>'; nextMarked=true; }
+    }
+    const tag = b.skip ? '<span class="tag warn">skip, exam</span>'
+      : b.tag ? '<span class="tag'+(b.tag.warn?' warn':'')+'">'+esc(b.tag.t)+'</span>' : '';
+    rows.push({sm:b.sm, html:
+      '<div class="'+cls+'">'+(b.skip?'<span class="sp"></span>':tick(b.key,done))
+      +'<span class="tm n">'+b.s+'–'+b.e+'</span><div>'
+      +'<div class="sub"><span class="dot c-'+b.c+'"></span><span class="t">'+COURSES[b.c].name+'</span>'
+      +'<span class="faint small n" style="font-weight:400">'+hrs(b.em-b.sm)+'</span>'+state+tag+'</div>'
+      +(b.what?'<div class="what">'+esc(b.what)+'</div>':'')
+      +(b.topic?'<div class="what faint small">'+esc(b.topic)+'</div>':'')
+      +(b.list&&b.list.length?'<ul class="list">'+b.list.map(it=>'<li><span>'+(it.kind==='lecture'?'▶':'📄')+'</span><span>'+esc(it.t)
+        +'</span><span class="n">'+it.m+'m</span></li>').join('')+'</ul>':'')
+      +'</div></div>'});
+  });
+  return rows.sort((a,b)=>a.sm-b.sm).map(r=>r.html).join('');
+}
+
+function studyMin(pl){ return pl.blocks.filter(b=>!b.skip).reduce((a,b)=>a+(b.em-b.sm),0); }
+
+function bannersFor(p,mon){
+  const k=dstr(mon); let h='';
+  if(k===BREAK_WEEK) h+='<div class="banner"><b>Fall break.</b> No classes this week. Keep the routine light and catch up on anything left over.</div>';
+  if(!WEEKS.includes(k) && mon>parseD(WEEKS[WEEKS.length-1])) h+='<div class="banner">Teaching weeks are over. Check Deadlines for finals.</div>';
+  const end=dstr(addDays(mon,6));
+  const ex=allItems().filter(it=>it.kind==='exam'&&it.people.includes(p)&&it.due.slice(0,10)>=k&&it.due.slice(0,10)<=end);
+  if(ex.length) h+='<div class="banner warn"><b>Exam week:</b> '+ex.map(e=>esc(e.title)+' '+DAYN[dow(parseDT(e.due))].slice(0,3)+' '+e.due.slice(11)).join(' · ')
+    +'. Blocks for these subjects switch to exam prep automatically.</div>';
+  return h;
 }
 
 /* ---------- TODAY ---------- */
 function vToday(){
-  const people = WHO==='both'?['y','l']:[WHO];
-  const k=weekKey(NOW), wn=weekNo(k);
-  const soon=allItems().filter(it=>!isDone(it.id) && people.some(p=>it.people.includes(p)) && parseDT(it.due)>NOW)
-    .slice(0,60);
-  const next=soon[0];
-  const plans={}; people.forEach(p=>plans[p]=planDay(p,NOW,S.mode));
-  const totalMin=people.reduce((a,p)=>a+plans[p].blocks.reduce((x,b)=>x+(b.end-b.start),0),0);
-  const doneMin=people.reduce((a,p)=>a+plans[p].blocks.filter(b=>isDone(b.key)).reduce((x,b)=>x+(b.end-b.start),0),0);
-  const u=next?untilTxt(next.due):null;
-  const alerts=soon.filter(it=>(parseDT(it.due)-NOW)<48*36e5);
+  const p=WHO, pl=dayPlan(p,NOW), k=weekKey(NOW), wn=weekNo(k);
+  const total=studyMin(pl), live=pl.blocks.filter(b=>!b.skip);
+  const doneN=live.filter(b=>isDone(b.key)).length;
+  const upcoming=allItems().filter(it=>it.people.includes(p)&&!isDone(it.id)&&parseDT(it.due)>NOW);
+  const week=upcoming.filter(it=>parseDT(it.due)-NOW<7*864e5);
 
-  let h='';
-  h+='<section class="strip">'
-   + '<div class="date"><span class="d1">'+DAYN[dow(NOW)]+'</span>'
-   + '<span class="d2">'+NOW.getDate()+' '+MON[NOW.getMonth()]+' 2026'
-   + (wn?' · Week '+wn+' of the semester':'')+(HOLIDAYS[dstr(NOW)]?' · '+HOLIDAYS[dstr(NOW)]:'')+'</span></div>'
-   + '<div class="divider"></div>'
-   + '<div class="stat"><span class="eyebrow">Next deadline</span><span class="v countdown '+(u?u.cls:'')+'">'
-   + (next?esc(u.txt):'—')+' <small>'+(next?esc(next.title.slice(0,34)):'nothing ahead')+'</small></span></div>'
-   + '<div class="divider"></div>'
-   + '<div class="stat"><span class="eyebrow">Planned today</span><span class="v">'
-   + (people.length>1
-       ? people.map(p=>PEOPLE[p].name[0]+' '+hrs(plans[p].blocks.reduce((x,b)=>x+(b.end-b.start),0))).join(' · ')
-       : hrs(totalMin)+' <small>'+hrs(doneMin)+' done</small>')+'</span></div>'
-   + '<div class="divider"></div>'
-   + '<div class="stat"><span class="eyebrow">Mode</span><span class="v">'+MODES[S.mode].label+' <small>'+MODES[S.mode].hint+'</small></span></div>'
-   + '</section>';
+  let h='<section class="hello"><h1>'+DAYN[dow(NOW)]+', '+NOW.getDate()+' '+MON[NOW.getMonth()]+'</h1>'
+    +'<p class="muted">'+(wn?'Week '+wn+' · ':'')
+    +(pl.rest?'Rest day':total?hrs(total)+' of study · '+doneN+' of '+live.length+' done':'No study blocks today')
+    +(HOLIDAYS[dstr(NOW)]?' · '+HOLIDAYS[dstr(NOW)]:'')+'</p></section>';
+  h+=bannersFor(p,mondayOf(NOW));
 
-  if(alerts.length){
-    h+='<section class="card"><div class="bd" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
-     + '<span class="eyebrow" style="margin-right:4px">Next 48 hours</span>'
-     + alerts.map(it=>'<span class="chip '+((parseDT(it.due)-NOW)<24*36e5?'crit':'warn')+'">'+esc(it.title.split(' — ')[0])
-        +' · '+fmtD(parseDT(it.due)).slice(0,3)+' '+it.due.slice(11)+'</span>').join('')
-     + '</div></section>';
+  if(pl.rest){
+    h+='<section class="card day"><div class="rest">'+esc(pl.routine.note)
+      +'<ul>'+pl.routine.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul></div></section>';
+  }else{
+    h+='<section class="card rows">'+(rowsHtml(p,NOW,pl,true)||'<div class="row"><span class="sp"></span><span></span><span class="muted">Nothing scheduled.</span></div>')+'</section>';
   }
 
-  h+='<div class="grid '+(people.length>1?'g2':'g2')+'">';
-  people.forEach(p=>{
-    const pl=plans[p];
-    h+='<section class="card"><div class="hd">'+courseDot('other')
-      +'<h3>'+PEOPLE[p].name+' · today</h3><span class="sp"></span>'
-      +'<span class="chip">'+pl.blocks.length+' blocks</span></div><div class="bd tight">';
-    if(pl.breakWeek){ h+=emptyState('Fall break. Nothing scheduled — go outside.'); }
-    else if(pl.offSemester){ h+=emptyState('Outside the Fall 2026 teaching weeks.'); }
-    else{
-      h+='<div class="tl">';
-      const rows=pl.classes.map(c=>({sm:c.sm,html:
-        '<div class="row class t-'+c.c+'"><div class="tm">'+c.s+'<br>'+c.e+'</div><div class="body">'
-        +'<div class="ttl">'+esc(COURSES[c.c].code)+' · '+esc(c.t)+'</div>'
-        +'<div class="meta">'+esc(c.room)+(c.who?' · '+esc(c.who):'')+'</div></div></div>'}));
-      if(!rows.length) rows.push({sm:0,html:'<div class="row"><div class="tm">—</div><div class="body"><div class="meta">No classes today.</div></div></div>'});
-      h+=rows.sort((a,b)=>a.sm-b.sm).map(r=>r.html).join('')+'</div>';
-      h+='<div class="eyebrow" style="margin:14px 0 8px">Study plan</div>';
-      h+='<div class="blocks">';
-      h+=pl.blocks.map(b=>{
-        const done=isDone(b.key);
-        return '<div class="blk '+(b.together?'together ':'')+(done?'done':'')+'">'
-          +'<button class="tick" role="checkbox" aria-checked="'+done+'" data-tick="'+b.key+'" aria-label="mark done"></button>'
-          +'<span class="b-time">'+toHM(b.start)+'<br>'+toHM(b.end)+'</span>'
-          +'<span><span class="b-title t-'+b.c+'">'+(b.together?'♥ ':'')+esc(COURSES[b.c].code)+' · '+esc(b.title)+'</span>'
-          +'<span class="b-why">'+esc(b.why)+'</span></span>'
-          +'<span class="b-len">'+hrs(b.end-b.start)+'</span></div>';
-      }).join('') || emptyState('No study blocks fit today — the timetable is full.');
-      h+='</div>';
-      if(pl.unfit.length){
-        h+='<div class="unfit"><b>Did not fit:</b> '+pl.unfit.map(x=>COURSES[x.c].code+' '+hrs(x.min)).join(' · ')
-          +'. Move it to the weekend, or switch to '+(S.mode==='B'?'Steady':'Push')+' and re-check.</div>';
-      }
-    }
-    h+='</div></section>';
-  });
-  h+='</div>';
-
-  // note to each other
-  const other = WHO==='l'?'y':'l';
-  h+='<section class="card notecard"><div class="hd">'
-   +'<h3>♥ Note board</h3><span class="sp"></span><span class="chip rose">both of you see this</span></div><div class="bd">'
-   +'<div class="grid g2">'
-   +['y','l'].map(p=>'<div class="field"><label>From '+PEOPLE[p].name+'</label>'
-     +'<input class="note-in" data-note="'+p+'" value="'+esc(S.notes[p]||'')+'" placeholder="one line for '+PEOPLE[p==='y'?'l':'y'].name+'…"></div>').join('')
-   +'</div></div></section>';
+  if(week.length){
+    h+='<section class="card dl"><div class="wk">Due in the next 7 days</div>'
+      +week.map(itemHtml).join('')+'</section>';
+  }
   return h;
-}
-function emptyState(msg){
-  return '<div class="empty"><svg width="52" height="42" viewBox="0 0 52 42" fill="none" aria-hidden="true">'
-    +'<path d="M14 6h12l6 10H8l6-10Z" stroke="var(--line)" stroke-width="1.4" stroke-linejoin="round"/>'
-    +'<path d="M20 16v14M13 30h14" stroke="var(--line)" stroke-width="1.4" stroke-linecap="round"/>'
-    +'<circle cx="20" cy="20" r="2.4" fill="var(--amber)"/>'
-    +'<path d="M36 26h7v6a3.5 3.5 0 0 1-7 0v-6Z" stroke="var(--line)" stroke-width="1.4"/>'
-    +'<path d="M43 28h2.5a2 2 0 0 1 0 4H43" stroke="var(--line)" stroke-width="1.4"/></svg>'
-    +'<span>'+esc(msg)+'</span></div>';
 }
 
 /* ---------- WEEK ---------- */
 function vWeek(){
-  const people=WHO==='both'?['y','l']:[WHO];
-  const mon=mondayOf(NOW), k=dstr(mon), wn=weekNo(k);
+  const p=WHO, mon=mondayOf(NOW), k=dstr(mon), wn=weekNo(k);
   const days=[0,1,2,3,4,5,6].map(n=>addDays(mon,n));
-  const items=allItems();
-  let h='<div class="view-head"><h1>Week of '+mon.getDate()+' '+MON[mon.getMonth()]+'</h1>'
-    +'<p>'+(wn?'Semester week '+wn+'. ':'')+(k===BREAK_WEEK?'Fall break — nothing is scheduled.':
-      'Fixed classes are outlined; study blocks are the plan. Rose blocks are the ones you sit down for together.')+'</p></div>';
+  const plans=days.map(d=>dayPlan(p,d));
+  const by={}; let total=0;
+  plans.forEach(pl=>pl.blocks.forEach(b=>{ if(b.skip) return; by[b.c]=(by[b.c]||0)+(b.em-b.sm); total+=b.em-b.sm; }));
+  const items=allItems().filter(it=>it.people.includes(p));
 
-  people.forEach(p=>{
-    const plans=days.map(d=>planDay(p,d,S.mode));
-    const total=plans.reduce((a,pl)=>a+pl.blocks.reduce((x,b)=>x+(b.end-b.start),0),0);
-    const bySub={};
-    plans.forEach(pl=>pl.blocks.forEach(b=>bySub[b.c]=(bySub[b.c]||0)+(b.end-b.start)));
-    h+='<section class="card"><div class="hd"><h3>'+PEOPLE[p].name+'</h3><span class="sp"></span>'
-      +'<span class="chip">'+hrs(total)+' of study planned</span>'
-      +Object.keys(bySub).map(c=>'<span class="chip"><span class="dot c-'+c+'"></span>'+COURSES[c].code.split(' ')[0]+' '+hrs(bySub[c])+'</span>').join('')
-      +'</div><div class="bd"><div class="weekwrap"><div class="week">';
-    days.forEach((d,i)=>{
-      const pl=plans[i], today=dstr(d)===dstr(NOW), past=dstr(d)<dstr(NOW);
-      const due=items.filter(it=>it.people.includes(p)&&it.due.slice(0,10)===dstr(d)&&!isDone(it.id));
-      h+='<div class="day'+(today?' today':'')+(past?' past':'')+((dow(d)>5)?' off':'')+'">'
-        +'<div class="dh"><b>'+DAYN[dow(d)].slice(0,3)+'</b><span>'+d.getDate()+' '+MON[d.getMonth()]+'</span></div>'
-        +'<div class="dbody">';
-      due.forEach(it=>h+='<div class="mini due"><span class="mt">'+it.due.slice(11)+' due</span>'+esc(it.title.split(' — ')[0])+'</div>');
-      pl.classes.forEach(c=>h+='<div class="mini cls"><span class="mt">'+c.s+'–'+c.e+'</span><span class="t-'+c.c+'">'+COURSES[c.c].code.split(' ')[0]+'</span> '+esc(c.t)+'</div>');
-      pl.blocks.forEach(b=>h+='<div class="mini study'+(b.together?' tg':'')+'"><span class="mt">'+toHM(b.start)+'–'+toHM(b.end)+'</span>'
-        +'<span class="t-'+b.c+'">'+(b.together?'♥ ':'')+COURSES[b.c].code.split(' ')[0]+'</span> '+esc(short(b.topic||b.title,44))+'</div>');
-      if(pl.holiday) h+='<div class="mini">'+esc(pl.holiday)+'</div>';
-      if(pl.breakWeek) h+='<div class="mini">Fall break</div>';
-      if(dow(d)===6) h+='<div class="mini tg">Evening off the clock ♥</div>';
-      h+='</div></div>';
-    });
-    h+='</div></div></div></section>';
+  let h='<section class="hello"><h1>Week of '+mon.getDate()+' '+MON[mon.getMonth()]+'</h1>'
+    +'<p class="muted">'+(wn?'Semester week '+wn+' · ':'')+hrs(total)+' of study</p></section>';
+  h+='<div class="summary">'+Object.keys(by).sort((a,b)=>by[b]-by[a])
+    .map(c=>'<span><span class="dot c-'+c+'"></span>'+COURSES[c].name+' <span class="n">'+hrs(by[c])+'</span></span>').join('')+'</div>';
+  h+=bannersFor(p,mon);
+
+  days.forEach((d,i)=>{
+    const pl=plans[i], today=dstr(d)===dstr(NOW);
+    const due=items.filter(it=>it.kind!=='exam'&&it.due.slice(0,10)===dstr(d));
+    h+='<section class="card day'+(today?' today':'')+'"><div class="dh"><h3>'+DAYN[dow(d)]+'</h3>'
+      +'<span class="faint small n">'+d.getDate()+' '+MON[d.getMonth()]+'</span>'
+      +(today?'<span class="tag now">today</span>':'')
+      +'<span class="r n">'+(pl.rest?'rest':hrs(studyMin(pl)))+'</span></div>';
+    if(due.length) h+='<div class="note">'+due.map(it=>'<span class="tag'+(isDone(it.id)?'':' warn')+'">due '+it.due.slice(11)+' · '+esc(it.title.split(' · ')[0])+'</span>').join(' ')+'</div>';
+    if(pl.rest){
+      h+='<div class="rest">'+esc(pl.routine.note)+'<ul>'+pl.routine.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul></div>';
+    }else{
+      if(pl.routine.note) h+='<div class="note">'+esc(pl.routine.note)+'</div>';
+      h+='<div class="rows">'+rowsHtml(p,d,pl,false)+'</div>';
+    }
+    h+='</section>';
   });
   return h;
 }
 
 /* ---------- DEADLINES ---------- */
+function itemHtml(it){
+  const done=isDone(it.id), dt=parseDT(it.due), u=untilTxt(it.due);
+  return '<div class="item'+(done?' done':'')+'">'+tick(it.id,done)
+    +'<div><div class="t"><span class="dot c-'+(COURSES[it.c]?it.c:'other')+'"></span>'+esc(it.title)
+    +(it.kind==='exam'?' <span class="tag warn">exam</span>':'')
+    +(it.assumed?' <span class="tag">date assumed</span>':'')
+    +(it.custom?'<button class="x" data-del="'+it.id+'">remove</button>':'')+'</div>'
+    +'<div class="d n">'+DAYN[dow(dt)].slice(0,3)+' '+dt.getDate()+' '+MON[dt.getMonth()]+', '+it.due.slice(11)
+    +(it.note?' · '+esc(it.note):'')+'</div></div>'
+    +'<span class="left'+(u.soon&&!done?' soon':'')+'">'+u.txt+'</span></div>';
+}
 function vDue(){
-  const people=WHO==='both'?['y','l']:[WHO];
-  const items=allItems().filter(it=>people.some(p=>it.people.includes(p)));
-  const upcoming=items.filter(it=>parseDT(it.due)>=new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()));
+  const p=WHO;
+  const items=allItems().filter(it=>it.people.includes(p) && parseDT(it.due)>=dayStart(NOW));
   const groups={};
-  upcoming.forEach(it=>{ const k=dstr(mondayOf(parseDT(it.due))); (groups[k]=groups[k]||[]).push(it); });
+  items.forEach(it=>{ const k=dstr(mondayOf(parseDT(it.due))); (groups[k]=groups[k]||[]).push(it); });
 
-  let h='<div class="view-head"><h1>Deadlines</h1><p>Everything the syllabi commit you to, plus whatever you add. '
-    +'Dashed chips are assumptions — correct them when the real date lands on Moodle.</p></div>';
+  let h='<section class="hello"><h1>Deadlines</h1><p class="muted">'+PEOPLE[p].name+' · everything still ahead</p></section>';
 
-  h+='<section class="card"><div class="hd"><h3>Add something</h3><span class="sp"></span>'
-   +'<button class="btn" id="exportCsv">Export for Google Calendar</button></div><div class="bd">'
-   +'<div class="grid" style="grid-template-columns:2fr 1fr 1fr 1fr auto; align-items:end; gap:10px">'
-   +'<div class="field"><label>What</label><input type="text" id="nTitle" placeholder="CS lab 3 report"></div>'
-   +'<div class="field"><label>Course</label><select id="nCourse">'
-     +Object.keys(COURSES).map(c=>'<option value="'+c+'">'+COURSES[c].code+'</option>').join('')+'<option value="other">Other</option></select></div>'
-   +'<div class="field"><label>Due</label><input type="date" id="nDate" value="'+dstr(addDays(NOW,3))+'"></div>'
-   +'<div class="field"><label>Time</label><input type="time" id="nTime" value="21:00"></div>'
-   +'<div class="field"><label>Whose</label><select id="nWho">'
-     +[['y','Yerkhat'],['l','Lashyn'],['both','Both']].map(o=>'<option value="'+o[0]+'"'+(WHO===o[0]?' selected':'')+'>'+o[1]+'</option>').join('')
-     +'</select></div>'
-   +'</div><div style="margin-top:12px;display:flex;gap:10px;align-items:end">'
-   +'<div class="field" style="max-width:150px"><label>Hours of work</label><input type="number" id="nEst" value="2" min="0" step="0.5"></div>'
-   +'<button class="btn primary" id="addItem">Add to the calendar</button></div>'
-   +'</div></section>';
+  h+='<details class="card"><summary>Add a deadline</summary><div class="in"><div class="form">'
+   +'<label class="full">What<input type="text" id="nTitle" placeholder="CS lab 5"></label>'
+   +'<label>Course<select id="nCourse">'+PEOPLE[p].courses.map(c=>'<option value="'+c+'">'+COURSES[c].name+'</option>').join('')+'<option value="other">Other</option></select></label>'
+   +'<label>For<select id="nWho"><option value="'+p+'">'+PEOPLE[p].name+'</option><option value="both">Both of us</option></select></label>'
+   +'<label>Date<input type="date" id="nDate" value="'+dstr(addDays(NOW,3))+'"></label>'
+   +'<label>Time<input type="time" id="nTime" value="21:00"></label>'
+   +'<div class="full"><button class="btn" id="addItem">Add</button></div>'
+   +'</div></div></details>';
 
-  h+='<section class="card"><div class="dl">';
   const keys=Object.keys(groups).sort();
-  if(!keys.length) h+=emptyState('Nothing left this semester.');
+  h+='<section class="card dl">';
+  if(!keys.length) h+='<div class="item"><span></span><span class="muted">Nothing left.</span></div>';
   keys.forEach(k=>{
-    const wn=weekNo(k);
-    h+='<div class="gh"><b>'+(k===BREAK_WEEK?'Fall break':'Week of '+parseD(k).getDate()+' '+MON[parseD(k).getMonth()])+'</b>'
-      +'<span>'+(wn?'semester week '+wn:'')+'</span></div>';
-    groups[k].forEach(it=>{
-      const u=untilTxt(it.due), done=isDone(it.id), dt=parseDT(it.due);
-      h+='<div class="item'+(done?' done':'')+'">'
-       +'<button class="tick" role="checkbox" aria-checked="'+done+'" data-tick="'+it.id+'" aria-label="mark done"></button>'
-       +'<span class="when">'+DAYN[dow(dt)].slice(0,3)+' '+dt.getDate()+' '+MON[dt.getMonth()]+'<br>'+it.due.slice(11)+'</span>'
-       +'<span><span class="n">'+courseDot(it.c)+esc(it.title)
-         +(it.assumed?'<span class="chip assumed">assumed</span>':'')
-         +(it.kind==='exam'?'<span class="chip warn">exam</span>':'')
-         +(it.people.length===2?'<span class="chip rose">both</span>':'<span class="chip">'+PEOPLE[it.people[0]].name+'</span>')
-         +'</span>'
-       +(it.note?'<span class="sub">'+esc(it.note)+'</span>':'')+'</span>'
-       +'<span class="right"><span class="chip '+u.cls+'">'+u.txt+'</span>'
-       +(it.est?'<span class="chip">'+it.est+'h work</span>':'')
-       +(it.custom?'<button class="btn ghost" data-del="'+it.id+'">remove</button>':'')+'</span></div>';
-    });
+    const m=parseD(k), wn=weekNo(k);
+    h+='<div class="wk">'+(k===BREAK_WEEK?'Fall break':'Week of '+m.getDate()+' '+MON[m.getMonth()])+(wn&&k!==BREAK_WEEK?' · week '+wn:'')+'</div>'
+      +groups[k].map(itemHtml).join('');
   });
-  h+='</div></section>';
+  h+='</section>';
+
+  h+='<details class="card"><summary>Course rules worth knowing</summary><div class="in">'
+    +PEOPLE[p].courses.map(c=>'<div class="ch"><span class="dot c-'+c+'"></span>'+COURSES[c].name+' <span class="faint small" style="font-weight:400">'+COURSES[c].code+'</span></div>'
+      +'<ul class="rules">'+RULES[c].map(r=>'<li>'+r+'</li>').join('')+'</ul>').join('')
+    +'</div></details>';
   return h;
 }
 
-/* ---------- HISTORY ---------- */
-function vHist(){
-  const seminarOf=w=>{const d=addDays(parseD(w),2); d.setHours(14,50,0,0); return d;};
-  const live=WEEKS.filter(w=>HST_WEEK[w]&&HST_WEEK[w].lec.length);
-  const cur=live.find(w=>seminarOf(w)>=NOW)||live[live.length-1];
-  let h='<div class="view-head"><h1>History load</h1><p>HST 100 is the course that eats weeks whole: three or four lecture videos '
-    +'plus two to four primary sources, every week, before Wednesday\'s seminar. Here it is cut into evenings.</p></div>';
-
-  const wkCard=(wk,open)=>{
-    const w=HST_WEEK[wk]; if(!w||!w.lec.length) return '';
-    const chunks=hstChunks(wk), sem=addDays(parseD(wk),2);
-    const total=chunks.reduce((a,c)=>a+c.m,0), doneN=chunks.filter(c=>isDone(c.id)).length;
-    let inner='<div class="chunks">'+chunks.map(c=>{
-      const done=isDone(c.id);
-      return '<div class="chunk'+(done?' done':'')+'">'
-        +'<button class="tick" role="checkbox" aria-checked="'+done+'" data-tick="'+c.id+'" aria-label="mark done"></button>'
-        +'<span class="day-l">'+DAYN[dow(c.day)].slice(0,3)+' '+c.day.getDate()+'</span>'
-        +'<span class="cn">'+esc(c.t)+'</span>'
-        +'<span class="kind">'+c.kind+' · '+c.m+'m</span></div>';
-    }).join('')+'</div>';
-    if(open) return '<section class="card"><div class="hd">'+courseDot('hst')+'<h3>'+esc(w.t)+'</h3><span class="sp"></span>'
-      +'<span class="chip">seminar '+DAYN[dow(sem)].slice(0,3)+' '+sem.getDate()+' '+MON[sem.getMonth()]+' 14:00</span>'
-      +'<span class="chip '+(doneN===chunks.length?'ok':'')+'">'+doneN+'/'+chunks.length+' done</span>'
-      +'<span class="chip">'+hrs(total)+' total</span></div><div class="bd">'+inner
-      +'<div class="unfit">In-class assignment Wednesday, first 10 minutes: 2 MCQ or one term definition (1 pt) + a 100–200 word answer (2 pts). '
-      +'Full marks in part 2 need the source named in the sentence — "As we learn from the Secret History of the Mongols…". Best 10 of 13 count.</div>'
-      +'</div></section>';
-    return '<details class="wk"><summary>'+courseDot('hst')+'<b>'+esc(w.t)+'</b>'
-      +'<span class="chip">'+DAYN[dow(sem)].slice(0,3)+' '+sem.getDate()+' '+MON[sem.getMonth()]+'</span>'
-      +'<span class="chip">'+hrs(total)+'</span></summary><div class="in">'+inner+'</div></details>';
-  };
-  if(cur) h+=wkCard(cur,true);
-  const ahead=live.filter(w=>w!==cur&&seminarOf(w)>NOW), behind=live.filter(w=>seminarOf(w)<NOW&&w!==cur);
-  if(ahead.length) h+='<section class="card"><div class="hd"><h3>Still ahead</h3><span class="sp"></span>'
-    +'<span class="chip">'+ahead.length+' weeks</span></div>'+ahead.map(w=>wkCard(w,false)).join('')+'</section>';
-  if(behind.length) h+='<section class="card"><div class="hd"><h3>Already behind you</h3><span class="sp"></span>'
-    +'<span class="chip">useful again before the midterm</span></div>'+behind.map(w=>wkCard(w,false)).join('')+'</section>';
-  return h;
-}
-
-/* ---------- BIG PUSHES ---------- */
-function vPush(){
-  let h='<div class="view-head"><h1>Big pushes</h1><p>For the things that are too big for one sitting — a 150-problem set, a chapter of past exams. '
-    +'Give it a size and a date; it hands you today\'s quota.</p></div>';
-  h+='<div class="grid g2">';
-  (S.pushes||[]).forEach(p=>{
-    const days=Math.max(1, Math.ceil((parseD(p.due)-new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()))/864e5));
-    const buffer=Math.max(1, days-1);
-    const left=Math.max(0,p.total-p.done);
-    const quota=Math.ceil(left/buffer);
-    const pct=Math.min(100,Math.round(p.done/p.total*100));
-    const C=2*Math.PI*30;
-    h+='<section class="card"><div class="hd">'+courseDot(p.c)+'<h3>'+esc(p.title)+'</h3><span class="sp"></span>'
-      +'<button class="btn ghost" data-delpush="'+p.id+'">remove</button></div><div class="bd"><div class="push">'
-      +'<svg class="ring" viewBox="0 0 74 74"><circle cx="37" cy="37" r="30" fill="none" stroke="var(--sunk)" stroke-width="7"/>'
-      +'<circle cx="37" cy="37" r="30" fill="none" stroke="var(--amber)" stroke-width="7" stroke-linecap="round" '
-      +'stroke-dasharray="'+(C*pct/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 37 37)"/>'
-      +'<text x="37" y="42" text-anchor="middle">'+pct+'%</text></svg>'
-      +'<div><div class="quota">'+quota+' <span style="font-size:13px;color:var(--ink-2)">'+esc(p.unit)+' today</span></div>'
-      +'<div style="font-size:12.5px;color:var(--ink-2)">'+left+' left · '+days+' day'+(days===1?'':'s')+' to '
-      +fmtD(parseD(p.due))+' · aiming to finish a day early</div>'
-      +'<div class="bar"><i style="width:'+pct+'%"></i></div>'
-      +'<div style="display:flex;gap:8px;align-items:center;margin-top:8px">'
-      +'<span class="stepper"><button data-push="'+p.id+'" data-inc="-1">−</button>'
-      +'<input type="number" value="'+p.done+'" data-pushval="'+p.id+'"><button data-push="'+p.id+'" data-inc="1">+</button></span>'
-      +'<button class="btn" data-push="'+p.id+'" data-inc="'+quota+'">+ today\'s quota</button></div>'
-      +'</div></div></div></section>';
-  });
-  h+='</div>';
-  h+='<section class="card"><div class="hd"><h3>New push</h3></div><div class="bd">'
-   +'<div class="grid" style="grid-template-columns:2fr 1fr 1fr 1fr auto; gap:10px; align-items:end">'
-   +'<div class="field"><label>What</label><input type="text" id="pTitle" placeholder="Calculus past exams"></div>'
-   +'<div class="field"><label>How many</label><input type="number" id="pTotal" value="100" min="1"></div>'
-   +'<div class="field"><label>Called</label><input type="text" id="pUnit" value="problems"></div>'
-   +'<div class="field"><label>By</label><input type="date" id="pDue" value="'+dstr(addDays(NOW,14))+'"></div>'
-   +'<button class="btn primary" id="addPush">Add</button></div></div></section>';
-  return h;
-}
-
-/* ---------- COURSES ---------- */
-function vRef(){
-  const RULES={
-    phys:['Exams are 40 minutes inside your <b>Friday 11:00 recitation</b>, room 7E.125/2, Respondus LockDown Browser. Bring your ID; nothing else on the desk but a pen.',
-          'Answers score <b>90% for the number, 10% for the units</b> in Moodle format. A right solution in the wrong format is a zero.',
-          '<b>Stage 1</b> (raw data) is submitted before you leave the lab; <b>Stage 2</b> (analysis) one week later. No late submission, no re-submission, no extensions.',
-          'Groups of 3 are randomised every session — no swaps. More than 10 minutes late means no entry and a zero.',
-          'Lab grade = fraction of correctly calculated quantities. Appeals go to your LA within 3 days, then to Mereke Tontayeva.'],
-    math:['<b>No calculators</b> in either exam. AI tools are not allowed in this course at all.',
-          'A missed exam scores zero unless the absence is excused — then it takes the grade of the exam you did sit.',
-          'WeBWorK due dates come from Moodle; the ones in here are assumed weekly until you correct them.',
-          'Expect ≥6 hours a week outside class per the syllabus.'],
-    csci:['No syllabus loaded yet. Class times below are from your timetable; the weekly Thursday 21:00 lab deadline is an assumption.',
-          'Add the real deadlines on the Deadlines page and they will start driving the study plan.'],
-    hst:['The weekly assignment opens at the start of the seminar and <b>the link closes 10 minutes later</b>. Phones go on the front desk. Lockdown Browser.',
-         'Best 10 of 13 assignments count — but each is 3% of the whole course, so one skipped week is not free.',
-         '<b>3 unexcused absences fail the course.</b> Being more than 5 minutes late can cost 0.5%.',
-         'AI is banned outright — including grammar fixing, translation and summarising. Treated as plagiarism.',
-         'Midterm format: for two questions of three, give terms, a one-sentence thesis, 3 arguments + 1 counterargument, each with cited evidence. You do not write the essay.',
-         'Guest lectures are worth up to 2 extra points for a ~500-word response each.']
-  };
-  let h='<div class="view-head"><h1>Courses</h1><p>The rules that actually bite, in one place.</p></div><div class="grid g2">';
-  Object.keys(COURSES).forEach(c=>{
-    const co=COURSES[c];
-    const takenBy=Object.values(PEOPLE).filter(p=>p.courses.includes(c)).map(p=>p.name).join(' & ');
-    h+='<section class="card"><div class="hd">'+courseDot(c)+'<h3>'+esc(co.code)+' · '+esc(co.name)+'</h3>'
-      +'<span class="sp"></span><span class="chip">'+takenBy+'</span></div><div class="bd">';
-    if(co.weights.length){
-      h+='<div style="display:flex;gap:6px;margin-bottom:12px">'+co.weights.map(w=>
-        '<span style="flex:'+w[1]+';text-align:center"><span class="loadbar" style="margin-bottom:4px"><i style="width:100%;background:var(--'+c+')"></i></span>'
-        +'<span style="font-size:11px;color:var(--ink-2);display:block;line-height:1.25">'+esc(w[0])+'<br><b class="num">'+w[1]+'%</b></span></span>').join('')+'</div>';
-    }
-    ['y','l'].filter(p=>PEOPLE[p].courses.includes(c)).forEach(p=>{
-      const cl=CLASSES[p].filter(x=>x.c===c);
-      h+='<div class="eyebrow" style="margin:10px 0 5px">'+PEOPLE[p].name+'</div><dl class="kv">'
-        +cl.map(x=>'<dt>'+DAYN[x.d].slice(0,3)+' '+x.s+'–'+x.e+'</dt><dd>'+esc(x.t)+' · '+esc(x.room)+(x.labWeek?' · lab weeks only':'')+'</dd>').join('')
-        +'</dl>';
-    });
-    h+='<ul class="rules" style="margin-top:12px">'+RULES[c].map(r=>'<li><span>'+r+'</span></li>').join('')+'</ul>';
-    if(co.note) h+='<div class="unfit">'+esc(co.note)+'</div>';
-    h+='</div></section>';
-  });
-  h+='</div>';
-  h+='<section class="card"><div class="hd"><h3>Two things worth knowing now</h3></div><div class="bd"><ul class="rules">'
-   +'<li><span><b>Saturday 3 October is a double.</b> Calculus Exam I and the History midterm land on the same day. '
-   +'Start the history thesis-and-arguments drills in the week of 21 September, and keep the last two days before the 3rd for calculus.</span></li>'
-   +'<li><span><b>Physics has no final.</b> Four exams at 17.5% each — Exam 1 on 11 September is already a seventh of the course grade.</span></li>'
-   +'</ul></div></section>';
-  return h;
-}
-
-/* =========================================================================
-   RENDER + EVENTS
-   ========================================================================= */
-/* ---------- SELF-STUDY ROUTINE ---------- */
-const SUBJ={phys:'Physics',math:'Calculus',csci:'Programming',hst:'History'};
-function rtMin(b){return toMin(b[1])-toMin(b[0])}
-function rtDayTotal(day){return day.groups.reduce((a,g)=>a+g.blocks.reduce((x,b)=>x+rtMin(b),0),0)}
-function rtWeekTotals(p){
-  const by={};
-  ROUTINE[p].forEach(d=>d.groups.forEach(g=>{by[g.c]=(by[g.c]||0)+g.blocks.reduce((x,b)=>x+rtMin(b),0)}));
-  return by;
-}
-function nextWeekKey(k){const i=WEEKS.indexOf(k); let j=i+1; if(WEEKS[j]===BREAK_WEEK) j++; return WEEKS[j]||null}
-
-/* the reading list a history block covers, and which seminar it is for */
-function hstFor(slot,k){
-  if(slot==='drill') return null;
-  const target=(slot==='sat'||slot==='sun') ? nextWeekKey(k) : k;
-  if(!target) return null;
-  return {k:target, slot, items:hstSplit(target)[slot]||[], seminar:addDays(parseD(target),2)};
-}
-
-function vPlan(){
-  const mon=mondayOf(NOW), k=dstr(mon), wn=weekNo(k);
-  if(WHO==='both') return planBoth(mon,k,wn);
-  const p=WHO, days=[0,1,2,3,4,5,6].map(n=>addDays(mon,n));
-  const tot=rtWeekTotals(p), sum=Object.keys(tot).reduce((a,c)=>a+tot[c],0);
-
-  let h='<div class="view-head"><h1>Self-study</h1>'
-   +'<p>A fixed weekly routine — never more than two subjects a day, and each one long enough to matter. '
-   +'Every block sits in a real gap in '+PEOPLE[p].name+'’s timetable. Recitations are treated as free time and used for study.</p></div>';
-
-  h+='<div class="rtbar">'
-   +'<span class="eyebrow">Week of '+mon.getDate()+' '+MON[mon.getMonth()]+(wn?' · week '+wn:'')+'</span>'
-   +'<span class="sp"></span>'
-   +Object.keys(tot).sort((a,b)=>tot[b]-tot[a]).map(c=>'<span class="chip"><span class="dot c-'+c+'"></span>'
-      +COURSES[c].code.split(' ')[0]+' '+hrs(tot[c])+'</span>').join('')
-   +'<span class="chip strong">'+hrs(sum)+' a week</span></div>';
-
-  if(k===BREAK_WEEK) h+='<div class="banner">Fall break — the routine restarts on Monday '+addDays(parseD(BREAK_WEEK),7).getDate()+' Oct.</div>';
-  const exam=allItems().filter(it=>it.kind==='exam'&&it.people.includes(p)&&it.due.slice(0,10)>=k&&it.due.slice(0,10)<=dstr(addDays(mon,6)));
-  exam.forEach(e=>h+='<div class="banner warn"><b>'+esc(e.title)+'</b> — '+fmtD(parseDT(e.due))+' '+e.due.slice(11)
-    +'. Give the '+COURSES[e.c].code.split(' ')[0]+' blocks the whole week and push the other subject to the weekend.</div>');
-
-  h+='<div class="rt">';
-  days.forEach((date,i)=>{
-    const day=ROUTINE[p][i], today=dstr(date)===dstr(NOW);
-    const fixed=classesOn(p,date).filter(c=>!/Recitation/i.test(c.t));
-    const hol=HOLIDAYS[dstr(date)];
-    h+='<section class="dayc'+(today?' today':'')+'">'
-     +'<div class="dh"><h3>'+DAYN[dow(date)]+'</h3><span class="dt num">'+date.getDate()+' '+MON[date.getMonth()]+'</span>'
-     +(today?'<span class="now">today</span>':'')
-     +'<span class="tot num">'+hrs(rtDayTotal(day))+'</span></div>';
-
-    h+='<div class="fixed">';
-    if(k===BREAK_WEEK||!wn) h+='<span class="fx none">no classes</span>';
-    else if(!fixed.length) h+='<span class="fx none">no classes — the day is yours</span>';
-    else fixed.forEach(c=>h+='<span class="fx"><b class="num">'+c.s+'</b><span class="dot c-'+c.c+'"></span>'
-      +COURSES[c.c].code.split(' ')[0]+' <span class="fxt">'+esc(c.t)+'</span></span>');
-    if(hol) h+='<span class="fx none">'+esc(hol)+'</span>';
-    h+='</div><p class="dnote">'+esc(day.note)+'</p>';
-
-    day.groups.forEach(g=>{
-      const mins=g.blocks.reduce((x,b)=>x+rtMin(b),0);
-      const topic = g.c==='phys'?(PHYS_WEEK[k]||{}).t : g.c==='math'?(MATH_WEEK[k]||{}).t : null;
-      h+='<div class="grp">'
-       +'<div class="gh"><span class="dot c-'+g.c+'"></span><h4>'+SUBJ[g.c]+'</h4>'
-       +'<span class="code">'+COURSES[g.c].code+'</span>'
-       +(g.slot?'<span class="slot">recitation slot</span>':'')
-       +'<span class="mins num">'+hrs(mins)+'</span></div>'
-       +'<p class="why">'+esc(g.why)+'</p>';
-
-      const hs=g.hst?hstFor(g.hst,k):null;
-      g.blocks.forEach(b=>{
-        h+='<div class="blk"><span class="tm num">'+b[0]+'–'+b[1]+'</span><div class="wt">';
-        if(hs){
-          h+='<span class="fortag">for the seminar on Wed '+hs.seminar.getDate()+' '+MON[hs.seminar.getMonth()]+' · '
-            +esc(short((HST_WEEK[hs.k]||{}).t||'',38))+'</span>';
-          if(hs.slot==='consolidate'){
-            h+='<div class="it"><span class="k notes">notes</span>Fill whatever the reading slots did not reach</div>'
-             +'<div class="it"><span class="k notes">terms</span>Write the week’s terms, one line of evidence per source</div>'
-             +'<div class="it"><span class="k notes">plan</span>Draft the 100–200 word answer you would write tomorrow</div>';
-          }else if(hs.items.length) hs.items.forEach(it=>h+='<div class="it"><span class="k '+it.kind+'">'+it.kind+'</span>'
-            +esc(short(it.t,64))+'<span class="m num">'+it.m+'m</span></div>');
-          else h+='<div class="it"><span class="k notes">notes</span>Nothing new set this week — re-read and consolidate</div>';
-        }else{
-          h+=esc(b[2]);
-          if(topic) h+='<span class="topic">'+esc(short(topic,72))+'</span>';
-        }
-        h+='</div></div>';
-      });
-      h+='</div>';
-    });
-    if(dow(date)===5) h+='<div class="grp off">Friday evening is not a study block ♥</div>';
-    h+='</section>';
-  });
-  h+='</div>';
-  h+='<p class="foot-note">The times are the routine, not the law: if a block slips, move it inside the same day — '
-    +'the order is what keeps the deadlines safe.</p>';
-  return h;
-}
-
-/* both, side by side — where the two routines line up */
-function planBoth(mon,k,wn){
-  const days=[0,1,2,3,4,5,6].map(n=>addDays(mon,n));
-  let h='<div class="view-head"><h1>Self-study</h1><p>Both routines side by side. '
-   +'Rose means you are on the same subject at the same time — that is the block to sit at one desk for.</p></div>';
-  h+='<div class="rtbar"><span class="eyebrow">Week of '+mon.getDate()+' '+MON[mon.getMonth()]+(wn?' · week '+wn:'')+'</span>'
-   +'<span class="sp"></span>'
-   +['y','l'].map(p=>{const t=rtWeekTotals(p);const s=Object.keys(t).reduce((a,c)=>a+t[c],0);
-      return '<span class="chip">'+PEOPLE[p].name+' '+hrs(s)+'</span>';}).join('')+'</div>';
-  h+='<div class="cmp"><div class="ch"><span></span><span>Yerkhat</span><span>Lashyn</span></div>';
-  days.forEach((date,i)=>{
-    const today=dstr(date)===dstr(NOW);
-    const rows=['y','l'].map(p=>ROUTINE[p][i]);
-    const flat=rows.map(d=>d.groups.reduce((a,g)=>a.concat(g.blocks.map(b=>({c:g.c,s:toMin(b[0]),e:toMin(b[1])}))),[]));
-    const tg=flat[0].some(x=>flat[1].some(y=>y.c===x.c && Math.min(x.e,y.e)-Math.max(x.s,y.s)>=45));
-    h+='<div class="cr'+(today?' today':'')+'"><div class="cd"><b>'+DAYN[dow(date)].slice(0,3)+'</b>'
-      +'<span class="num">'+date.getDate()+'</span>'+(tg?'<span class="tgm">♥</span>':'')+'</div>';
-    rows.forEach((d,ri)=>{
-      h+='<div class="cc">';
-      d.groups.forEach(g=>{
-        const mins=g.blocks.reduce((x,b)=>x+rtMin(b),0);
-        const together = flat[1-ri].some(y=>y.c===g.c &&
-          g.blocks.some(b=>Math.min(toMin(b[1]),y.e)-Math.max(toMin(b[0]),y.s)>=45));
-        h+='<div class="cb'+(together?' tg':'')+'"><span class="tm num">'+g.blocks[0][0]+'</span>'
-          +'<span class="dot c-'+g.c+'"></span>'+COURSES[g.c].code.split(' ')[0]
-          +'<span class="m num">'+hrs(mins)+'</span></div>';
-      });
-      h+='</div>';
-    });
-    h+='</div>';
-  });
-  h+='</div>';
-  return h;
-}
-
+const VIEWS=[['today','Today'],['week','Week'],['due','Deadlines']];
 function render(){
   NOW=new Date();
-  document.getElementById('whoSeg').innerHTML=
-    [['y','<span class="dotY"></span>Yerkhat'],['l','<span class="dotL"></span>Lashyn'],['both','Both']]
-    .map(([v,l])=>'<button data-who="'+v+'" aria-pressed="'+(WHO===v)+'">'+l+'</button>').join('');
-  document.getElementById('modeSeg').style.display = VIEW==='plan' ? 'none' : '';
-  document.getElementById('modeSeg').innerHTML=
-    Object.keys(MODES).map(m=>'<button data-mode="'+m+'" aria-pressed="'+(S.mode===m)+'" title="'+MODES[m].hint+'">'+MODES[m].label+'</button>').join('');
-  document.getElementById('nav').innerHTML=
-    VIEWS.map(v=>'<button data-view="'+v.id+'"'+(VIEW===v.id?' aria-current="page"':'')+'><span class="em">'+v.em+'</span>'+v.label+'</button>').join('');
-  const m=document.getElementById('main');
-  m.innerHTML = VIEW==='plan'?vPlan(): VIEW==='today'?vToday(): VIEW==='week'?vWeek(): VIEW==='due'?vDue():
-                VIEW==='hist'?vHist(): VIEW==='push'?vPush(): vRef();
-  document.getElementById('fortune').textContent=FORTUNES[NOW.getDate()%FORTUNES.length];
+  document.getElementById('tabs').innerHTML=VIEWS.map(([id,l])=>'<button data-view="'+id+'"'+(VIEW===id?' aria-current="page"':'')+'>'+l+'</button>').join('');
+  document.getElementById('who').innerHTML=['l','y'].map(p=>'<button data-who="'+p+'" aria-pressed="'+(WHO===p)+'">'+PEOPLE[p].name+'</button>').join('');
+  document.getElementById('main').innerHTML = VIEW==='today'?vToday(): VIEW==='week'?vWeek(): vDue();
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-view],[data-who],[data-mode],[data-tick],[data-del],[data-push],[data-delpush],#addItem,#addPush,#exportCsv');
+  const t=e.target.closest('[data-view],[data-who],[data-tick],[data-del],#addItem');
   if(!t) return;
-  if(t.dataset.view){ VIEW=t.dataset.view; if(VIEW==='hist') WHO='l'; render(); window.scrollTo({top:0}); return; }
-  if(t.dataset.who){ WHO=t.dataset.who; render(); return; }
-  if(t.dataset.mode){ S.mode=t.dataset.mode; persist(); render(); return; }
+  if(t.dataset.view){ VIEW=t.dataset.view; render(); window.scrollTo({top:0}); return; }
+  if(t.dataset.who){ WHO=t.dataset.who; try{localStorage.setItem('tandem.who',WHO)}catch(err){} render(); return; }
   if(t.dataset.tick){ toggleDone(t.dataset.tick); return; }
   if(t.dataset.del){ S.custom=(S.custom||[]).filter(c=>c.id!==t.dataset.del); persist(); render(); return; }
-  if(t.dataset.delpush){ S.pushes=(S.pushes||[]).filter(p=>p.id!==t.dataset.delpush); persist(); render(); return; }
-  if(t.dataset.push){
-    const p=(S.pushes||[]).find(x=>x.id===t.dataset.push); if(!p) return;
-    p.done=Math.max(0,Math.min(p.total, p.done + Number(t.dataset.inc))); persist(); render(); return;
-  }
   if(t.id==='addItem'){
     const title=document.getElementById('nTitle').value.trim(); if(!title) return;
     const who=document.getElementById('nWho').value;
-    S.custom=(S.custom||[]).concat([{
-      id:'x'+Date.now(), title, c:document.getElementById('nCourse').value,
+    S.custom=(S.custom||[]).concat([{id:'x'+Date.now(), title, c:document.getElementById('nCourse').value,
       due:document.getElementById('nDate').value+'T'+document.getElementById('nTime').value,
-      est:Number(document.getElementById('nEst').value)||1,
-      people: who==='both'?['y','l']:[who], kind:'task', note:''
-    }]);
-    persist(); render(); return;
+      people: who==='both'?['y','l']:[who]}]);
+    persist(); render();
   }
-  if(t.id==='addPush'){
-    const title=document.getElementById('pTitle').value.trim(); if(!title) return;
-    S.pushes=(S.pushes||[]).concat([{id:'p'+Date.now(), title, total:Number(document.getElementById('pTotal').value)||10,
-      unit:document.getElementById('pUnit').value||'items', due:document.getElementById('pDue').value, done:0, c:'other'}]);
-    persist(); render(); return;
-  }
-  if(t.id==='exportCsv'){ exportCsv(t); return; }
 });
-document.addEventListener('change',e=>{
-  if(e.target.dataset.pushval){
-    const p=(S.pushes||[]).find(x=>x.id===e.target.dataset.pushval); if(!p) return;
-    p.done=Math.max(0,Math.min(p.total,Number(e.target.value)||0)); persist(); render();
-  }
-  if(e.target.dataset.note){ S.notes[e.target.dataset.note]=e.target.value.slice(0,140); persist(); }
-});
-
-async function exportCsv(btn){
-  const rows=[['Subject','Start Date','Start Time','End Date','End Time','All Day Event','Description','Location']];
-  allItems().filter(it=>!isDone(it.id)).forEach(it=>{
-    const d=parseDT(it.due), end=new Date(d.getTime()+30*6e4);
-    const date=(x)=>pad(x.getMonth()+1)+'/'+pad(x.getDate())+'/'+x.getFullYear();
-    const time=(x)=>pad(x.getHours())+':'+pad(x.getMinutes())+':00';
-    rows.push([COURSES[it.c]?COURSES[it.c].code+' · '+it.title:it.title, date(d), time(d), date(end), time(end),
-      'False', (it.note||'')+' [for '+it.people.map(p=>PEOPLE[p].name).join(' & ')+']', '']);
-  });
-  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
-  let dl=null; try{ dl = window.claude&&claude.use ? await claude.use('downloads') : null; }catch(e){}
-  if(dl){
-    try{ await dl.save({filename:'tandem-deadlines.csv', data:csv}); btn.textContent='Saved — import it in Google Calendar'; }
-    catch(err){ btn.textContent = err && err.code==='declined' ? 'Export for Google Calendar' : 'Export unavailable here'; }
-  }else{
-    const blob=new Blob([csv],{type:'text/csv'}), a=document.createElement('a');
-    a.href=URL.createObjectURL(blob); a.download='tandem-deadlines.csv'; a.click(); URL.revokeObjectURL(a.href);
-  }
-}
 
 loadLocal();
 render();
 initDB();
-setInterval(()=>{ if(VIEW==='today') render(); }, 60000);
+setInterval(()=>{ if(VIEW==='today' && !document.querySelector('input:focus')) render(); }, 60000);
 </script>
 
 </body>
