@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0E1218">
+<meta name="theme-color" content="#FBF7F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13121A" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Fall 2026 semester tracker: deadlines, timetable and a daily study plan.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -11,44 +12,64 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 <title>Tandem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('tandem.theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}</script>
 
 <style>
 :root{
-  --bg:#F6F5F2; --card:#FFFFFF; --soft:#F1EFEA;
-  --ink:#1F2328; --ink-2:#5E656E; --ink-3:#9BA1A8;
-  --line:#E8E5DF;
-  --accent:#2F6FEB; --accent-soft:#E8F0FE;
-  --warn:#B4541F; --warn-soft:#FBEDE3;
-  --ok:#2E8A5F;
-  --phys:#4A6FC4; --math:#2E8E78; --csci:#C27442; --hst:#9064AE;
-  --r:14px;
+  --bg:#FBF7F4;
+  --g1:#FFD9C7; --g2:#E2DBFF; --g3:#CFEFE6; --g4:#FFE6F0;
+  --card:rgba(255,255,255,.66); --card-solid:#FFFFFF; --soft:rgba(120,110,160,.08);
+  --ink:#2A2536; --ink-2:#686277; --ink-3:#A29CAF;
+  --line:rgba(120,105,150,.13); --edge:rgba(255,255,255,.75);
+  --accent:#7B6AF2; --accent-2:#E87FB0; --accent-soft:rgba(123,106,242,.12);
+  --warn:#C8613A; --warn-soft:rgba(240,140,100,.16);
+  --ok:#3FAF86;
+  --phys:#6F8CF5; --math:#3DB59A; --csci:#F0996B; --hst:#B387E6;
+  --shadow:0 1px 2px rgba(60,40,90,.04), 0 10px 30px -12px rgba(80,60,130,.18);
+  --r:18px;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#121417; --card:#1A1D21; --soft:#22262B;
-    --ink:#E8E6E1; --ink-2:#A3A9B0; --ink-3:#6C737B;
-    --line:#2A2E34;
-    --accent:#7EA6F6; --accent-soft:#1E2A3F;
-    --warn:#E8955F; --warn-soft:#33241A;
-    --ok:#62C08F;
-    --phys:#86A3E6; --math:#63C1A8; --csci:#E0A07A; --hst:#C09ADB;
+    --bg:#13121A;
+    --g1:#4A2552; --g2:#232E66; --g3:#133F45; --g4:#3A1F40;
+    --card:rgba(32,30,44,.62); --card-solid:#201E2C; --soft:rgba(255,255,255,.06);
+    --ink:#EEEAF4; --ink-2:#ABA5BA; --ink-3:#736D84;
+    --line:rgba(255,255,255,.07); --edge:rgba(255,255,255,.06);
+    --accent:#A597FF; --accent-2:#F29BC4; --accent-soft:rgba(165,151,255,.15);
+    --warn:#F2A07A; --warn-soft:rgba(242,160,122,.13);
+    --ok:#6BD3A8;
+    --phys:#93A9FF; --math:#6FD6BC; --csci:#F7B48E; --hst:#CDA9F5;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 14px 34px -16px rgba(0,0,0,.6);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#121417; --card:#1A1D21; --soft:#22262B;
-  --ink:#E8E6E1; --ink-2:#A3A9B0; --ink-3:#6C737B;
-  --line:#2A2E34;
-  --accent:#7EA6F6; --accent-soft:#1E2A3F;
-  --warn:#E8955F; --warn-soft:#33241A;
-  --ok:#62C08F;
-  --phys:#86A3E6; --math:#63C1A8; --csci:#E0A07A; --hst:#C09ADB;
+  --bg:#13121A;
+  --g1:#4A2552; --g2:#232E66; --g3:#133F45; --g4:#3A1F40;
+  --card:rgba(32,30,44,.62); --card-solid:#201E2C; --soft:rgba(255,255,255,.06);
+  --ink:#EEEAF4; --ink-2:#ABA5BA; --ink-3:#736D84;
+  --line:rgba(255,255,255,.07); --edge:rgba(255,255,255,.06);
+  --accent:#A597FF; --accent-2:#F29BC4; --accent-soft:rgba(165,151,255,.15);
+  --warn:#F2A07A; --warn-soft:rgba(242,160,122,.13);
+  --ok:#6BD3A8;
+  --phys:#93A9FF; --math:#6FD6BC; --csci:#F7B48E; --hst:#CDA9F5;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 14px 34px -16px rgba(0,0,0,.6);
 }
 
 *{box-sizing:border-box}
 body{
-  margin:0; background:var(--bg); color:var(--ink);
+  margin:0; background:var(--bg); color:var(--ink); min-height:100vh;
   font:15px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif;
   -webkit-font-smoothing:antialiased;
+}
+/* the soft gradient sits on a fixed layer so it doesn't scroll away (iOS ignores background-attachment:fixed) */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(60vmax 45vmax at 0% 0%, var(--g1), transparent 70%),
+    radial-gradient(55vmax 45vmax at 100% 10%, var(--g2), transparent 70%),
+    radial-gradient(60vmax 50vmax at 80% 100%, var(--g3), transparent 70%),
+    radial-gradient(45vmax 40vmax at 10% 85%, var(--g4), transparent 70%),
+    var(--bg);
 }
 h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.01em}
 p{margin:0}
@@ -59,17 +80,23 @@ button{cursor:pointer}
 
 /* ---------- header ---------- */
 .wrap{max-width:760px; margin:0 auto; padding:0 18px 80px}
-header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg) 92%,transparent);
-  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+header{position:sticky; top:0; z-index:10;
+  background:color-mix(in srgb,var(--bg) 55%,transparent);
+  backdrop-filter:blur(22px) saturate(1.4); -webkit-backdrop-filter:blur(22px) saturate(1.4);
+  border-bottom:1px solid var(--line)}
+.theme{border:1px solid var(--edge); background:var(--card); box-shadow:var(--shadow); width:34px; height:34px; border-radius:12px;
+  display:grid; place-items:center; color:var(--ink-2); padding:0}
+.theme:hover{color:var(--ink)}
+.theme svg{width:17px; height:17px}
 .bar{max-width:760px; margin:0 auto; padding:14px 18px 10px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
-.brand{font-weight:650; font-size:16px; margin-right:auto}
-.tabs{display:flex; gap:2px}
-.tabs button,.who button{border:0; background:transparent; color:var(--ink-2); padding:6px 11px; border-radius:9px; font-size:14px}
+.brand{font-weight:700; font-size:17px; margin-right:auto; letter-spacing:-.01em;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.tabs,.who{display:flex; gap:2px; padding:3px; border-radius:14px; background:var(--card); border:1px solid var(--edge);
+  box-shadow:var(--shadow); backdrop-filter:blur(16px) saturate(1.3); -webkit-backdrop-filter:blur(16px) saturate(1.3)}
+.tabs button,.who button{border:0; background:transparent; color:var(--ink-2); padding:6px 13px; border-radius:11px; font-size:14px; transition:background .15s,color .15s}
 .tabs button:hover,.who button:hover{color:var(--ink)}
-.tabs button[aria-current="page"]{color:var(--ink); background:var(--card); box-shadow:0 0 0 1px var(--line)}
-.who{display:flex; background:var(--soft); border-radius:10px; padding:2px}
-.who button{font-size:13px; padding:4px 10px}
-.who button[aria-pressed="true"]{background:var(--card); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.tabs button[aria-current="page"],.who button[aria-pressed="true"]{color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.who button{font-size:13px; padding:5px 11px}
 @media(max-width:560px){
   .bar{gap:8px 10px}
   .tabs{order:3; width:100%}
@@ -79,7 +106,8 @@ header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg
 main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 
 /* ---------- common ---------- */
-.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r)}
+.card{background:var(--card); border:1px solid var(--edge); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden;
+  backdrop-filter:blur(18px) saturate(1.3); -webkit-backdrop-filter:blur(18px) saturate(1.3)}
 .pad{padding:16px 18px}
 .muted{color:var(--ink-2)} .faint{color:var(--ink-3)}
 .small{font-size:13px}
@@ -87,10 +115,11 @@ main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 .dot{width:8px; height:8px; border-radius:50%; display:inline-block; flex:0 0 auto}
 .c-phys{background:var(--phys)} .c-math{background:var(--math)} .c-csci{background:var(--csci)} .c-hst{background:var(--hst)} .c-other{background:var(--ink-3)}
 
-.hello h1{font-size:24px}
+.hello{padding:6px 2px 2px}
+.hello h1{font-size:26px; letter-spacing:-.02em}
 .hello p{margin-top:2px}
-.banner{border-radius:12px; padding:11px 14px; font-size:14px; background:var(--soft); color:var(--ink-2)}
-.banner.warn{background:var(--warn-soft); color:var(--ink)}
+.banner{border-radius:14px; padding:11px 14px; font-size:14px; background:var(--card); border:1px solid var(--edge); color:var(--ink-2)}
+.banner.warn{background:linear-gradient(135deg,var(--warn-soft),transparent); color:var(--ink)}
 .banner b{color:var(--ink)}
 
 /* ---------- day rows ---------- */
@@ -105,12 +134,16 @@ main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 .row .list li span:last-child{margin-left:auto; color:var(--ink-3); white-space:nowrap}
 .row.cls .sub{font-weight:500; color:var(--ink-2); font-size:14px}
 .row.cls .tm{color:var(--ink-3)}
-.row.exam{background:var(--warn-soft)}
+.s-phys{--sc:var(--phys)} .s-math{--sc:var(--math)} .s-csci{--sc:var(--csci)} .s-hst{--sc:var(--hst)}
+.row.study{background:linear-gradient(90deg,color-mix(in srgb,var(--sc) 13%,transparent),color-mix(in srgb,var(--sc) 3%,transparent) 75%)}
+.row.study .sub .t{color:color-mix(in srgb,var(--sc) 55%,var(--ink))}
+.row.exam{background:linear-gradient(90deg,var(--warn-soft),transparent 80%)}
 .row.exam .sub{color:var(--warn)}
+.row.done{background:transparent}
 .row.done .sub,.row.done .what,.row.done .list{opacity:.45}
 .row.done .sub span.t{text-decoration:line-through}
-.row.skip{opacity:.45}
-.row.now{box-shadow:inset 3px 0 0 var(--accent)}
+.row.skip{opacity:.45; background:transparent}
+.row.now{box-shadow:inset 3px 0 0 var(--sc,var(--accent))}
 @media(max-width:560px){
   .row{grid-template-columns:22px 1fr; row-gap:2px; padding:11px 14px}
   .row>.tm{grid-column:2; font-size:12.5px}
@@ -122,10 +155,11 @@ main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 .tag.now{color:var(--accent); background:var(--accent-soft)}
 .tag.warn{color:var(--warn); background:var(--warn-soft)}
 
-.tick{appearance:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line); background:var(--card);
-  margin:1px 0 0; padding:0; display:grid; place-items:center}
-.tick:hover{border-color:var(--ink-3)}
-.tick[aria-checked="true"]{background:var(--ok); border-color:var(--ok)}
+.tick{appearance:none; width:20px; height:20px; border-radius:7px; border:1.5px solid color-mix(in srgb,var(--sc,var(--accent)) 45%,transparent);
+  background:var(--card-solid); margin:1px 0 0; padding:0; display:grid; place-items:center; transition:transform .12s}
+.tick:hover{border-color:var(--sc,var(--accent))}
+.tick:active{transform:scale(.9)}
+.tick[aria-checked="true"]{background:linear-gradient(135deg,var(--ok),color-mix(in srgb,var(--ok) 60%,var(--math))); border-color:transparent}
 .tick[aria-checked="true"]::after{content:""; width:5px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:translate(0,-1px) rotate(45deg)}
 .sp{width:20px}
 
@@ -133,7 +167,7 @@ main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 .day .dh{display:flex; align-items:baseline; gap:8px; padding:13px 18px 11px; border-bottom:1px solid var(--line)}
 .day .dh h3{font-size:15px}
 .day .dh .r{margin-left:auto; font-size:13px; color:var(--ink-3)}
-.day.today{border-color:var(--accent)}
+.day.today{box-shadow:0 0 0 1.5px color-mix(in srgb,var(--accent) 55%,transparent), var(--shadow)}
 .day .note{padding:10px 18px 0; font-size:13px; color:var(--ink-3)}
 .day .rest{padding:14px 18px 16px; font-size:14px; color:var(--ink-2)}
 .day .rest ul{margin:8px 0 0; padding-left:18px; color:var(--ink-2); font-size:13.5px}
@@ -144,7 +178,9 @@ main{display:flex; flex-direction:column; gap:14px; padding-top:14px}
 .dl .wk{padding:10px 18px 6px; font-size:12px; color:var(--ink-3); font-weight:500; border-top:1px solid var(--line)}
 .dl .wk:first-child{border-top:0}
 .item{display:grid; grid-template-columns:22px 1fr auto; gap:10px; padding:9px 18px; align-items:start}
-.item .t{font-size:14px; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+.item .t{font-size:14px; display:flex; align-items:baseline; gap:4px 7px; flex-wrap:wrap}
+.item .t .dot{align-self:center; margin-top:1px}
+.item .t .tt{flex:1 1 60%; min-width:0}
 .item .d{font-size:12.5px; color:var(--ink-3); margin-top:1px}
 .item .left{font-size:12.5px; color:var(--ink-3); white-space:nowrap; padding-top:2px}
 .item .left.soon{color:var(--warn); font-weight:600}
@@ -161,7 +197,7 @@ details.card .in{padding:0 18px 16px}
 .form .full{grid-column:1/-1}
 .form label{display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--ink-3)}
 .form input,.form select{background:var(--soft); border:1px solid var(--line); border-radius:9px; padding:8px 10px; font-size:14px; width:100%}
-.btn{border:0; background:var(--ink); color:var(--bg); border-radius:9px; padding:9px 14px; font-size:14px; font-weight:500}
+.btn{border:0; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; border-radius:11px; padding:9px 16px; font-size:14px; font-weight:500}
 .btn.lite{background:var(--soft); color:var(--ink)}
 .rules{margin:4px 0 12px; padding-left:18px; font-size:13.5px; color:var(--ink-2)}
 .rules li{margin:3px 0}
@@ -178,6 +214,7 @@ footer{margin-top:28px; font-size:12.5px; color:var(--ink-3); text-align:center}
     <span class="brand">Tandem</span>
     <nav class="tabs" id="tabs"></nav>
     <div class="who" id="who" role="group" aria-label="Whose plan"></div>
+    <button class="theme" id="theme" aria-label="Switch light or dark"></button>
   </div>
 </header>
 
@@ -618,6 +655,19 @@ function dayPlan(p,date){
 let VIEW='today', WHO='l', NOW=new Date();
 try{ const w=localStorage.getItem('tandem.who'); if(w==='y'||w==='l') WHO=w; }catch(e){}
 
+/* light / dark: follows the phone until someone taps the button */
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>';
+const darkMq=window.matchMedia('(prefers-color-scheme: dark)');
+function isDark(){ const t=document.documentElement.dataset.theme; return t? t==='dark' : darkMq.matches; }
+function paintTheme(){
+  const dark=isDark();
+  document.getElementById('theme').innerHTML = dark?SUN:MOON;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m=>{ m.removeAttribute('media'); m.content = dark?'#13121A':'#FBF7F4'; });
+}
+try{ const t=localStorage.getItem('tandem.theme'); if(t==='dark'||t==='light') document.documentElement.dataset.theme=t; }catch(e){}
+darkMq.addEventListener && darkMq.addEventListener('change',paintTheme);
+
 const tick=(id,done)=>'<button class="tick" role="checkbox" aria-checked="'+done+'" data-tick="'+id+'" aria-label="Mark done"></button>';
 
 function rowsHtml(p,date,pl,live){
@@ -634,7 +684,7 @@ function rowsHtml(p,date,pl,live){
   let nextMarked=false;
   pl.blocks.forEach(b=>{
     const done=isDone(b.key);
-    let cls='row'; let state='';
+    let cls='row study s-'+b.c; let state='';
     if(b.skip) cls+=' skip';
     if(done) cls+=' done';
     if(live && !b.skip && !done){
@@ -735,8 +785,8 @@ function vWeek(){
 /* ---------- DEADLINES ---------- */
 function itemHtml(it){
   const done=isDone(it.id), dt=parseDT(it.due), u=untilTxt(it.due);
-  return '<div class="item'+(done?' done':'')+'">'+tick(it.id,done)
-    +'<div><div class="t"><span class="dot c-'+(COURSES[it.c]?it.c:'other')+'"></span>'+esc(it.title)
+  return '<div class="item s-'+(COURSES[it.c]?it.c:'other')+(done?' done':'')+'">'+tick(it.id,done)
+    +'<div><div class="t"><span class="dot c-'+(COURSES[it.c]?it.c:'other')+'"></span><span class="tt">'+esc(it.title)+'</span>'
     +(it.kind==='exam'?' <span class="tag warn">exam</span>':'')
     +(it.assumed?' <span class="tag">date assumed</span>':'')
     +(it.custom?'<button class="x" data-del="'+it.id+'">remove</button>':'')+'</div>'
@@ -787,8 +837,14 @@ function render(){
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-view],[data-who],[data-tick],[data-del],#addItem');
+  const t=e.target.closest('[data-view],[data-who],[data-tick],[data-del],#addItem,#theme');
   if(!t) return;
+  if(t.id==='theme'){
+    const next=isDark()?'light':'dark';
+    document.documentElement.dataset.theme=next;
+    try{localStorage.setItem('tandem.theme',next)}catch(err){}
+    paintTheme(); return;
+  }
   if(t.dataset.view){ VIEW=t.dataset.view; render(); window.scrollTo({top:0}); return; }
   if(t.dataset.who){ WHO=t.dataset.who; try{localStorage.setItem('tandem.who',WHO)}catch(err){} render(); return; }
   if(t.dataset.tick){ toggleDone(t.dataset.tick); return; }
@@ -805,6 +861,7 @@ document.addEventListener('click',e=>{
 
 loadLocal();
 render();
+paintTheme();
 initDB();
 setInterval(()=>{ if(VIEW==='today' && !document.querySelector('input:focus')) render(); }, 60000);
 </script>

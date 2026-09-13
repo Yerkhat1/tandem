@@ -14,7 +14,8 @@ out = f"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0E1218">
+<meta name="theme-color" content="#FBF7F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13121A" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Fall 2026 semester tracker: deadlines, timetable and a daily study plan.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
